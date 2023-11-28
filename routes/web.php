@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KelasController;
 
@@ -25,7 +26,6 @@ Route::get('/home', function () {
 
 // route tampil tabel kelas
 Route::resource('/kelas', KelasController::class);
-// route tampil form kelas
-// Route::get('/formKelas', [KelasController::class, 'formKelas']);
-// route tampil edit kelas
-// Route::get('/editKelas', [KelasController::class, 'editKelas']);
+// route crud departemen
+Route::resource('/department', DepartmentController::class);
+
