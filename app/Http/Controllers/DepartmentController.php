@@ -30,36 +30,27 @@ class DepartmentController extends Controller
         return redirect('/department')->with('success', 'New data has been added!');
     }
 
-    public function edit(Department $kelas, $id) {
-        $data = $kelas->find($id);
-        return view('kelas.editKelas')->with([
-            'title' => 'Edit Kelas',
+    public function edit(Department $departments, $id) {
+        $data = $departments->find($id);
+        return view('department.editDepartment')->with([
+            'title' => 'Edit Department',
             'id' => $id,
-            'jenjang' => $data->jenjang,
-            'nama_kelas' => $data->nama_kelas,
-            'jurusan' => $data->jurusan
+            'nama_department' => $data->nama_department
         ]);
     }
 
-    public function update(Request $request, Department $kelas, $id) {
-        $data = $kelas->find($id);
-        $data->jenjang = $request->jenjang;
-        $data->nama_kelas = $request->nama_kelas;
-        $data->jurusan = $request->jurusan;
+    public function update(Request $request, Department $department, $id) {
+        $data = $department->find($id);
+        $data->nama_department = $request->nama_department;
         $data->save();
-
-        // if($request->$id != $kelas->$id) {
-        //     $rules['id'] = 'required|max:6|unique:kelas';
-        // }
-
         
         return redirect('/kelas')->with('success', 'New data has been update!');
     }
 
-    public function destroy(Department $kelas,$id) {
-        $data = $kelas->find($id);
+    public function destroy(Department $departments, $id) {
+        $data = $departments->find($id);
         $data->delete();
-        // Kelas::destroy($kelas->id);
-        return redirect('/kelas')->with('success', 'Data has been deleted!');
+        return redirect('/department')->with('success', 'Data has been deleted!');
+        
     }
 }

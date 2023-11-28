@@ -44,8 +44,8 @@
                   <td>{{ $department->id }}</td>
                   <td>{{ $department->nama_department }}</td>
                   <td class="text-center">
-                    <a href="/kelas/{{ $department->id }}/edit" class="btn btn-sm btn-warning"><span><i class="bi bi-pencil-square"></i> Edit</span></a>
-                    <form action="/kelas/{{ $department->id }}" method="post" class="d-inline">
+                    <a href="/department/{{ $department->id }}/edit" class="btn btn-sm btn-warning"><span><i class="bi bi-pencil-square"></i> Edit</span></a>
+                    <form action="/department/{{ $department->id }}" method="post" class="d-inline">
                       @method('delete')
                       @csrf
                       <button type="submit" class="btn btn-sm btn-danger border-0" onclick="return confirm('Data Akan Dihapus?')"><span><i class="bi bi-x-circle"></i> Hapus</span></button>
