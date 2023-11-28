@@ -15,21 +15,19 @@ class DepartmentController extends Controller
     }
 
     public function create() {
-        return view('kelas.formKelas', [
-            'title' => 'Form Kelas'
+        return view('department.formDepartment', [
+            'title' => 'Form Department'
         ]);
     }
 
     public function store(Request $request) {
         $validateData = $request->validate([
-            'id' => 'required|max:6|unique:kelas',
-            'jenjang' => 'required',
-            'nama_kelas' => 'required',
-            'jurusan' => 'required'
+            'id' => 'required|max:6|unique:departments',
+            'nama_department' => 'required'
         ]);
 
         Department::create($validateData);
-        return redirect('/kelas')->with('success', 'New data has been added!');
+        return redirect('/department')->with('success', 'New data has been added!');
     }
 
     public function edit(Department $kelas, $id) {
