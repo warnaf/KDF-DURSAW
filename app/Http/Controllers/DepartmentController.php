@@ -39,12 +39,12 @@ class DepartmentController extends Controller
         ]);
     }
 
-    public function update(Request $request, Department $department, $id) {
-        $data = $department->find($id);
+    public function update(Request $request, Department $departments, $id) {
+        $data = $departments->find($id);
         $data->nama_department = $request->nama_department;
         $data->save();
         
-        return redirect('/kelas')->with('success', 'New data has been update!');
+        return redirect('/department')->with('success', 'New data has been update!');
     }
 
     public function destroy(Department $departments, $id) {
