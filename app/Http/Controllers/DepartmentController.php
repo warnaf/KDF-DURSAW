@@ -8,9 +8,9 @@ use App\Models\Department;
 class DepartmentController extends Controller
 {
     public function index() {
-        return view('kelas.dataKelas', [
-            'title' => 'Data Kelas',
-            'dataKelas' => Department::all()
+        return view('department.dataDepartment', [
+            'title' => 'Data Department',
+            'dataDepartment' => Department::all()
         ]);
     }
 

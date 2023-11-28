@@ -3,11 +3,11 @@
 @section('main')
 
 <div class="pagetitle">
-    <h1>Data Kelas</h1>
+    <h1>Data Department</h1>
     <nav class="d-flex justify-content-end">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/home">Home</a></li>
-        <li class="breadcrumb-item">Kelas</li>
+        <li class="breadcrumb-item">Department</li>
       </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -18,7 +18,7 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title"><i class="bi bi-menu-button-wide"></i>  Data Kelas</h5>
+            <h5 class="card-title"><i class="bi bi-menu-button-wide"></i>  Data Department</h5>
             @if(session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -26,30 +26,26 @@
             </div>
             @endif
             <hr>
-            <a class="btn btn-primary mb-3" type="submit" href="/kelas/create"><i class="bi bi-person-plus"></i> Tambah Data</a>
+            <a class="btn btn-primary mb-3" type="submit" href="/department/create"><i class="bi bi-person-plus"></i> Tambah Data</a>
             <!-- Table with stripped rows -->
             <table class="table table-bordered datatable">
               <thead>
                 <tr>
                   <th scope="col" class="text-center">No</th>
-                  <th scope="col" class="text-center">Kode Kelas</th>
-                  <th scope="col" class="text-center">Jenjang</th>
-                  <th scope="col" class="text-center">Nama Kelas</th>
-                  <th scope="col" class="text-center">Jurusan</th>
+                  <th scope="col" class="text-center">Kode Department</th>
+                  <th scope="col" class="text-center">Nama Department</th>
                   <th scope="col" class="text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody> 
-                @foreach ($dataKelas as $kelas)
+                @foreach ($dataDepartment as $department)
                 <tr>
                   <th scope="row" class="text-center">{{ $loop->iteration }}</th>
-                  <td>{{ $kelas->id }}</td>
-                  <td>{{ $kelas->jenjang }}</td>
-                  <td>{{ $kelas->nama_kelas }}</td>
-                  <td>{{ $kelas->jurusan }}</td>
+                  <td>{{ $department->id }}</td>
+                  <td>{{ $department->nama_department }}</td>
                   <td class="text-center">
-                    <a href="/kelas/{{ $kelas->id }}/edit" class="btn btn-sm btn-warning"><span><i class="bi bi-pencil-square"></i> Edit</span></a>
-                    <form action="/kelas/{{ $kelas->id }}" method="post" class="d-inline">
+                    <a href="/kelas/{{ $department->id }}/edit" class="btn btn-sm btn-warning"><span><i class="bi bi-pencil-square"></i> Edit</span></a>
+                    <form action="/kelas/{{ $department->id }}" method="post" class="d-inline">
                       @method('delete')
                       @csrf
                       <button type="submit" class="btn btn-sm btn-danger border-0" onclick="return confirm('Data Akan Dihapus?')"><span><i class="bi bi-x-circle"></i> Hapus</span></button>
