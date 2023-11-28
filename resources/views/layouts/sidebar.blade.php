@@ -21,8 +21,8 @@
             </a>
           </li>
           <li>
-            <a href="components-accordion.html">
-              <i class="bi bi-circle"></i><span>Menu Guru</span>
+            <a class="{{ Request::is('department*') ? 'active' : '' }}" href="/department">
+              <i class="bi bi-circle"></i><span>Menu Department</span>
             </a>
           </li>
           <li>
