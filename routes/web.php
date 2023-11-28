@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +17,15 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home',[
         "title" => "Home"
     ]);
 });
+
+// route tampil tabel kelas
+Route::resource('/kelas', KelasController::class);
+// route tampil form kelas
+// Route::get('/formKelas', [KelasController::class, 'formKelas']);
+// route tampil edit kelas
+// Route::get('/editKelas', [KelasController::class, 'editKelas']);
