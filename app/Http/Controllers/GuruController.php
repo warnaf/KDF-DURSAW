@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Guru;
+use App\Models\Department;
 
 class GuruController extends Controller
 {
@@ -16,20 +17,24 @@ class GuruController extends Controller
 
     public function create() {
         return view('guru.formGuru', [
-            'title' => 'Form Guru'
+            'title' => 'Form Guru',
+            'departments' => Department::all()
+            
         ]);
     }
 
     public function store(Request $request) {
         $validateData = $request->validate([
-            'id' => 'required|max:6|unique:kelas',
-            'jenjang' => 'required',
-            'nama_kelas' => 'required',
-            'jurusan' => 'required'
+            'id' => 'required|max:6|unique:guru',
+            'nama_guru' => 'required',
+            'jenis_kelamin' => 'required',
+            'department_id' => 'required',
+            'jabatan' => 'required',
+            'tanggal_masuk' => 'required'
         ]);
 
         Guru::create($validateData);
-        return redirect('/kelas')->with('success', 'New data has been added!');
+        return redirect('/guru')->with('success', 'New data has been added!');
     }
 
     public function edit(Guru $kelas, $id) {
