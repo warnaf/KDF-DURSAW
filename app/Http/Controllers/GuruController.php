@@ -37,36 +37,34 @@ class GuruController extends Controller
         return redirect('/guru')->with('success', 'New data has been added!');
     }
 
-    public function edit(Guru $kelas, $id) {
-        $data = $kelas->find($id);
-        return view('kelas.editKelas')->with([
-            'title' => 'Edit Kelas',
-            'id' => $id,
-            'jenjang' => $data->jenjang,
-            'nama_kelas' => $data->nama_kelas,
-            'jurusan' => $data->jurusan
+    public function edit(Guru $guru) {
+        // $data = $guru->find($id);
+        return view('guru.editGuru')->with([
+            'title' => 'Edit Guru',
+            // 'id' => $id,
+            // 'jenis_kelamin' => $data->jenis_kelamin,
+            // 'department_id' => $data->department_id,
+            // 'jabatan' => $data->jabatan,
+            // 'tahun_masuk' => $data->tahun_masuk,
+            'guru' => $guru,
+            'departments' => Department::all()
         ]);
     }
 
-    public function update(Request $request, Guru $kelas, $id) {
-        $data = $kelas->find($id);
+    public function update(Request $request, Guru $guru, $id) {
+        $data = $guru->find($id);
         $data->jenjang = $request->jenjang;
-        $data->nama_kelas = $request->nama_kelas;
+        $data->nama_guru = $request->nama_guru;
         $data->jurusan = $request->jurusan;
         $data->save();
-
-        // if($request->$id != $kelas->$id) {
-        //     $rules['id'] = 'required|max:6|unique:kelas';
-        // }
-
         
-        return redirect('/kelas')->with('success', 'New data has been update!');
+        return redirect('/guru')->with('success', 'New data has been update!');
     }
 
-    public function destroy(Guru $kelas,$id) {
-        $data = $kelas->find($id);
-        $data->delete();
-        // Kelas::destroy($kelas->id);
-        return redirect('/kelas')->with('success', 'Data has been deleted!');
+    public function destroy(Guru $guru) {
+        // $data = $guru->find($id);
+        // $data->delete();
+        Guru::destroy($guru->id);
+        return redirect('/guru')->with('success', 'Data has been deleted!');
     }
 }
