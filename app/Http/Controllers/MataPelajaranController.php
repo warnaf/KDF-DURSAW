@@ -48,10 +48,10 @@ class MataPelajaranController extends Controller
         return redirect('/department')->with('success', 'New data has been update!');
     }
 
-    public function destroy(MataPelajaran $departments, $id) {
-        $data = $departments->find($id);
+    public function destroy(MataPelajaran $mata_pelajara, $id) {
+        $data = $mata_pelajara->find($id);
         $data->delete();
-        return redirect('/department')->with('success', 'Data has been deleted!');
+        return redirect('/matpel')->with('success', 'Data has been deleted!');
         
     }
 }
