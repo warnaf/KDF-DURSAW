@@ -22,4 +22,8 @@ class Guru extends Model
         'tanggal_masuk'
     ];
     protected $hidden;
+
+    // public function departments() {
+    //     return $this->belongsTo(Department::class);
+    // }
 }

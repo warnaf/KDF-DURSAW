@@ -26,8 +26,8 @@
             </a>
           </li>
           <li>
-            <a href="components-badges.html">
-              <i class="bi bi-circle"></i><span>Menu</span>
+            <a class="{{ Request::is('guru*') ? 'active' : '' }}" href="/guru">
+              <i class="bi bi-circle"></i><span>Menu Guru</span>
             </a>
           </li>
           <li>
