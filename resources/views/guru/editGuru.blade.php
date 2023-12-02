@@ -67,7 +67,7 @@
                   <select class="form-select @error('department_id') is-invalid @enderror" aria-label="Default select example" name="department_id" id="department_id" required>
                     <option selected>pilih</option>
                     @foreach ($departments as $d)
-                    @if(old('department_id') == $d->id)
+                    @if(old('department_id', $guru->department_id) == $d->id)
                       <option value="{{ $d->id }}" selected>{{ $d->nama_department }}</option>
                     @else 
                       <option value="{{ $d->id }}" >{{ $d->nama_department }}</option>
