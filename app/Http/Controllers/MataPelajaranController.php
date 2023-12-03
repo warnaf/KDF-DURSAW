@@ -31,21 +31,23 @@ class MataPelajaranController extends Controller
         return redirect('/matpel')->with('success', 'New data has been added!');
     }
 
-    public function edit(MataPelajaran $departments, $id) {
-        $data = $departments->find($id);
-        return view('department.editDepartment')->with([
-            'title' => 'Edit Department',
+    public function edit(MataPelajaran $mata_pelajara, $id) {
+        $data = $mata_pelajara->find($id);
+        return view('mataPelajaran.editMatpel')->with([
+            'title' => 'Edit Mata Pelajaran',
             'id' => $id,
-            'nama_department' => $data->nama_department
+            'nama_mata_pelajara' => $data->nama_mata_pelajara,
+            'is_penjuruan' => $data->is_penjuruan
         ]);
     }
 
-    public function update(Request $request, MataPelajaran $departments, $id) {
-        $data = $departments->find($id);
-        $data->nama_department = $request->nama_department;
+    public function update(Request $request, MataPelajaran $mata_pelajara, $id) {
+        $data = $mata_pelajara->find($id);
+        $data->nama_mata_pelajara = $request->nama_mata_pelajara;
+        $data->is_penjuruan = $request->is_penjuruan;
         $data->save();
         
-        return redirect('/department')->with('success', 'New data has been update!');
+        return redirect('/matpel')->with('success', 'New data has been update!');
     }
 
     public function destroy(MataPelajaran $mata_pelajara, $id) {

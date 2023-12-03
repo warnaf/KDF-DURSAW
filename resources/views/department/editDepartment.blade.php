@@ -36,7 +36,7 @@
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="nama_kelas" class="col-sm-2 col-form-label">Nama Department</label>
+                <label for="nama_department" class="col-sm-2 col-form-label">Nama Department</label>
                 <div class="col-sm-9">
                   <input type="text" class="form-control @error('nama_department') is-invalid @enderror" name="nama_department" id="nama_department" placeholder="masukan nama department" required value="{{ old('nama_department',  $nama_department) }}">
                   @error('nama_department')
