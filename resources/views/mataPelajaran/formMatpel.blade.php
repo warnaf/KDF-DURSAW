@@ -48,7 +48,7 @@
               <div class="row mb-3">
                 <label for="is_penjuruan" class="col-sm-2 col-form-label">Penjuruan</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('is_penjuruan') is-invalid @enderror" name="is_penjuruan" id="is_penjuruan" placeholder="isi penjuruan atau jenjang" required value="{{ old('is_penjuruan') }}">
+                  <input type="text" class="form-control @error('is_penjuruan') is-invalid @enderror" name="is_penjuruan" id="is_penjuruan" placeholder="isi penjuruan" required value="{{ old('is_penjuruan') }}">
                   @error('is_penjuruan')
                     <div class="invalid-feedback">
                       {{ $message }}

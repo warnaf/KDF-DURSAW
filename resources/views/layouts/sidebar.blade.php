@@ -36,8 +36,8 @@
             </a>
           </li>
           <li>
-            <a href="components-buttons.html">
-              <i class="bi bi-circle"></i><span>Buttons</span>
+            <a class="{{ Request::is('detailMatpel*') ? 'active' : '' }}" href="/detailMatpel">
+              <i class="bi bi-circle"></i><span>Menu Detail Pelajaran</span>
             </a>
           </li>
           <li>
