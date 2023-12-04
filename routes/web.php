@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\MengajarController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\DetailMataPelajaranController;
@@ -37,4 +38,6 @@ Route::resource('/guru', GuruController::class);
 Route::resource('/matpel', MataPelajaranController::class);
 // route crud detail mata pelajaran
 Route::resource('/detailMatpel', DetailMataPelajaranController::class);
+// route crud mengajar
+Route::resource('/mengajar', MengajarController::class);
 
