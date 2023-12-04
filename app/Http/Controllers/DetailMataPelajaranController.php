@@ -22,25 +22,25 @@ class DetailMataPelajaranController extends Controller
     }
 
     public function create() {
-        return view('guru.formGuru', [
-            'title' => 'Form Guru',
-            'departments' => MataPelajaran::all()
+        return view('detailMataPelajaran.formDetailMatpel', [
+            'title' => 'Form Detail Matpel',
+            'detail_mata_pelajaran' => MataPelajaran::all()
             
         ]);
     }
 
     public function store(Request $request) {
         $validateData = $request->validate([
-            'id' => 'required|max:6|unique:guru',
-            'nama_guru' => 'required',
-            'jenis_kelamin' => 'required',
-            'department_id' => 'required',
-            'jabatan' => 'required',
-            'tanggal_masuk' => 'required'
+            'id' => 'required|max:6|unique:detail_mata_pelajaran',
+            'mata_pelajaran_ref' => 'required',
+            'jumlah_jam' => 'required',
+            'max_jam' => 'required',
+            'semester' => 'required',
+            'jenjang' => 'required'
         ]);
 
         DetailMataPelajaran::create($validateData);
-        return redirect('/guru')->with('success', 'New data has been added!');
+        return redirect('/detailMatpel')->with('success', 'New data has been added!');
     }
 
     public function edit(DetailMataPelajaran $guru) {
