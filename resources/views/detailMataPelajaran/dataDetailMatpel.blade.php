@@ -3,11 +3,11 @@
 @section('main')
 
 <div class="pagetitle">
-    <h1>Data Mata Pelajaran</h1>
+    <h1>Data Detail Pelajaran</h1>
     <nav class="d-flex justify-content-end">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/home">Home</a></li>
-        <li class="breadcrumb-item">MatPel</li>
+        <li class="breadcrumb-item">Pelajaran</li>
       </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -17,8 +17,8 @@
       <div class="col-lg-12">
 
         <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"><i class="bi bi-menu-button-wide"></i>  Data Mata Pelajaran</h5>
+          <div class="card-body table-responsive">
+            <h5 class="card-title"><i class="bi bi-menu-button-wide"></i>  Data Detail Pelajaran</h5>
             @if(session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -26,28 +26,34 @@
             </div>
             @endif
             <hr>
-            <a class="btn btn-primary mb-3" type="submit" href="/matpel/create"><i class="bi bi-person-plus"></i> Tambah Data</a>
+            <a class="btn btn-primary mb-3" type="submit" href="/detailMatpel/create"><i class="bi bi-person-plus"></i> Tambah Data</a>
             <!-- Table with stripped rows -->
-            <table class="table table-bordered datatable">
+            <table class="table table-sm table-bordered datatable">
               <thead>
                 <tr>
                   <th scope="col" class="text-center">No</th>
-                  <th scope="col" class="text-center">Kode Matpel</th>
-                  <th scope="col" class="text-center">Nama Matpel</th>
-                  <th scope="col" class="text-center">Penjuruan</th>
-                  <th scope="col" class="text-center">Aksi</th>
+                  <th scope="col" class="text-center">Kode Pelajaran</th>
+                  <th scope="col" class="text-center">Pelajaran</th>
+                  <th scope="col" class="text-center">Jam</th>
+                  <th scope="col" class="text-center">Max Jam</th>
+                  <th scope="col" class="text-center">Smt</th>
+                  <th scope="col" class="text-center">Jenjang</th>
+                  <th scope="col" class="text-center" width="18%">Aksi</th>
                 </tr>
               </thead>
               <tbody> 
-                @foreach ($dataMatpel as $matpel)
+                @foreach ($dataDetailMatpel as $dMatpel)
                 <tr>
                   <th scope="row" class="text-center">{{ $loop->iteration }}</th>
-                  <td>{{ $matpel->id }}</td>
-                  <td>{{ $matpel->nama_mata_pelajara }}</td>
-                  <td>{{ $matpel->is_penjuruan }}</td>
+                  <td>{{ $dMatpel->id }}</td>
+                  <td>{{ $dMatpel->nama_mata_pelajara }}</td>
+                  <td>{{ $dMatpel->jumlah_jam }}</td>
+                  <td>{{ $dMatpel->max_jam }}</td>
+                  <td>{{ $dMatpel->semester }}</td>
+                  <td>{{ $dMatpel->jenjang }}</td>
                   <td class="text-center">
-                    <a href="/matpel/{{ $matpel->id }}/edit" class="btn btn-sm btn-warning"><span><i class="bi bi-pencil-square"></i> Edit</span></a>
-                    <form action="/matpel/{{ $matpel->id }}" method="post" class="d-inline">
+                    <a href="/detailMatpel/{{ $dMatpel->id }}/edit" class="btn btn-sm btn-warning border-0"><span><i class="bi bi-pencil-square"></i> Edit</span></a>
+                    <form action="/detailMatpel/{{ $dMatpel->id }}" method="post" class="d-inline">
                       @method('delete')
                       @csrf
                       <button type="submit" class="btn btn-sm btn-danger border-0" onclick="return confirm('Data Akan Dihapus?')"><span><i class="bi bi-x-circle"></i> Hapus</span></button>
