@@ -70,10 +70,10 @@ class DetailMataPelajaranController extends Controller
         return redirect('/guru')->with('success', 'New data has been update!');
     }
 
-    public function destroy(DetailMataPelajaran $guru) {
-        // $data = $guru->find($id);
-        // $data->delete();
-        DetailMataPelajaran::destroy($guru->id);
-        return redirect('/guru')->with('success', 'Data has been deleted!');
+    public function destroy(DetailMataPelajaran $detail_mata_pelajaran, $id) {
+        $data = $detail_mata_pelajaran->find($id);
+        $data->delete();
+        // DetailMataPelajaran::destroy($detail_mata_pelajaran->id);
+        return redirect('/detailMatpel')->with('success', 'Data has been deleted!');
     }
 }
