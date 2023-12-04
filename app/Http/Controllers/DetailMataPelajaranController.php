@@ -43,31 +43,32 @@ class DetailMataPelajaranController extends Controller
         return redirect('/detailMatpel')->with('success', 'New data has been added!');
     }
 
-    public function edit(DetailMataPelajaran $guru) {
-        // $data = $guru->find($id);
-        return view('guru.editGuru')->with([
-            'title' => 'Edit Guru',
-            // 'id' => $id,
-            // 'jenis_kelamin' => $data->jenis_kelamin,
-            // 'department_id' => $data->department_id,
-            // 'jabatan' => $data->jabatan,
-            // 'tahun_masuk' => $data->tahun_masuk,
-            'guru' => $guru,
-            'departments' => MataPelajaran::all()
+    public function edit(DetailMataPelajaran $detail_mata_pelajaran, $id) {
+        $data = $detail_mata_pelajaran->find($id);
+        return view('detailMataPelajaran.editDetailMatpel')->with([
+            'title' => 'Edit Detail Pelajaran',
+            'id' => $id,
+            'mata_pelajaran_ref' => $data->mata_pelajaran_ref,
+            'jumlah_jam' => $data->jumlah_jam,
+            'max_jam' => $data->max_jam,
+            'semester' => $data->semester,
+            'jenjang' => $data->jenjang,
+            // 'detail_mata_pelajaran' => $detail_mata_pelajaran,
+            'mata_pelajaran' => MataPelajaran::all()
         ]);
     }
 
-    public function update(Request $request, DetailMataPelajaran $guru) {
-        $data = DetailMataPelajaran::find($guru->id);
+    public function update(Request $request, DetailMataPelajaran $detail_mata_pelajaran, $id) {
+        $data = $detail_mata_pelajaran->find($id);
         // $data->id = $request->id;
-        $data->nama_guru = $request->nama_guru;
-        $data->jenis_kelamin = $request->jenis_kelamin;
-        $data->department_id = $request->department_id;
-        $data->jabatan = $request->jabatan;
-        $data->tanggal_masuk = $request->tanggal_masuk;
+        $data->mata_pelajaran_ref = $request->mata_pelajaran_ref;
+        $data->jumlah_jam = $request->jumlah_jam;
+        $data->max_jam = $request->max_jam;
+        $data->semester = $request->semester;
+        $data->jenjang = $request->jenjang;
         $data->save();
         
-        return redirect('/guru')->with('success', 'New data has been update!');
+        return redirect('/detailMatpel')->with('success', 'New data has been update!');
     }
 
     public function destroy(DetailMataPelajaran $detail_mata_pelajaran, $id) {

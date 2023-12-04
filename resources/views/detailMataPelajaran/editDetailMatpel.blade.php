@@ -3,11 +3,11 @@
 @section('main')
 
 <div class="pagetitle">
-    <h1>Form Guru</h1>
+    <h1>Form Detail Pelajaran</h1>
     <nav class="d-flex justify-content-end">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/home">Home</a></li>
-        <li class="breadcrumb-item">Guru</li>
+        <li class="breadcrumb-item">Detail Matpel</li>
       </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -18,16 +18,16 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title"><i class="bi bi-download"></i> Edit Data Guru</h5>
+            <h5 class="card-title"><i class="bi bi-download"></i> Edit Data Detail Pelajaran</h5>
             <hr>
             <!-- General Form Elements -->
-            <form class="mt-4" method="post" action="/guru/{{ $guru->id }}">
+            <form class="mt-4" method="post" action="/detailMatpel/{{ $id }}">
               @method('put')
               @csrf
               <div class="row mb-3">
-                <label for="id" class="col-sm-2 col-form-label">Kode Guru</label>
+                <label for="id" class="col-sm-2 col-form-label">Kode Pelajaran</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('id') is-invalid @enderror" name="id" id="id" placeholder="masukan kode guru" required value="{{ old('id', $guru->id) }}" readonly>
+                  <input type="text" class="form-control @error('id') is-invalid @enderror" name="id" id="id" placeholder="masukan kode pelajaran" required value="{{ old('id', $id) }}" readonly>
                   {{-- @error('id')
                     <div class="invalid-feedback">
                       {{ $message }}
@@ -36,45 +36,19 @@
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="nama_guru" class="col-sm-2 col-form-label">Nama Guru</label>
+                <label class="col-sm-2 col-form-label">Nama Pelajaran</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('nama_guru') is-invalid @enderror" name="nama_guru" id="nama_guru" placeholder="masukan nama guru" required value="{{ old('nama_guru', $guru->nama_guru) }}">
-                  @error('nama_guru')
-                    <div class="invalid-feedback">
-                      {{ $message }}
-                    </div>
-                  @enderror
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Gender</label>
-                <div class="col-sm-9">
-                  <select class="form-select @error('jenis_kelamin') is-invalid @enderror" aria-label="Default select example" name="jenis_kelamin" id="jenis_kelamin" required>
-                      <option selected>pilih</option>
-                      <option value="L" {{ ($guru->jenis_kelamin == 'L') ? 'selected' : '' }}>Laki - laki</option>
-                      <option value="P" {{ ($guru->jenis_kelamin == 'P') ? 'selected' : '' }}>Perempuan</option>
-                  </select>
-                  @error('jenis_kelamin')
-                    <div class="invalid-feedback">
-                      {{ $message }}
-                    </div>
-                  @enderror
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Department</label>
-                <div class="col-sm-9">
-                  <select class="form-select @error('department_id') is-invalid @enderror" aria-label="Default select example" name="department_id" id="department_id" required>
+                  <select class="form-select @error('mata_pelajaran_ref') is-invalid @enderror" aria-label="Default select example" name="mata_pelajaran_ref" id="mata_pelajaran_ref" required>
                     <option selected>pilih</option>
-                    @foreach ($departments as $d)
-                    @if(old('department_id', $guru->department_id) == $d->id)
-                      <option value="{{ $d->id }}" selected>{{ $d->nama_department }}</option>
+                    @foreach ($mata_pelajaran as $mp)
+                    @if(old('mata_pelajaran_ref', $mata_pelajaran_ref) == $mp->id)
+                      <option value="{{ $mp->id }}" selected>{{ $mp->nama_mata_pelajara }}</option>
                     @else 
-                      <option value="{{ $d->id }}" >{{ $d->nama_department }}</option>
+                      <option value="{{ $mp->id }}" >{{ $mp->nama_mata_pelajara }}</option>
                     @endif 
                     @endforeach
                   </select>
-                  @error('department_id')
+                  @error('mata_pelajaran_ref')
                     <div class="invalid-feedback">
                       {{ $message }}
                     </div>
@@ -82,19 +56,37 @@
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
+                <label for="jumlah_jam" class="col-sm-2 col-form-label">Jumlah Jam</label>
                 <div class="col-sm-9">
-                  <select class="form-select @error('jabatan') is-invalid @enderror" aria-label="Default select example" name="jabatan" id="jabatan" required>
+                  <input type="text" class="form-control @error('jumlah_jam') is-invalid @enderror" name="jumlah_jam" id="jumlah_jam" placeholder="isi jumlah jam pelajaran" required value="{{ old('jumlah_jam', $jumlah_jam) }}">
+                  @error('jumlah_jam')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="max_jam" class="col-sm-2 col-form-label">Maksimal Jam</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control @error('max_jam') is-invalid @enderror" name="max_jam" id="max_jam" placeholder="isi jumlah maksimal jam pelajaran" required value="{{ old('max_jam', $max_jam) }}">
+                  @error('max_jam')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <label for="semester" class="col-sm-2 col-form-label">Semester</label>
+                <div class="col-sm-9">
+                  <select class="form-select @error('semester') is-invalid @enderror" aria-label="Default select example" name="semester" id="semester" required>
                     <option selected>pilih</option>
-                    <option value="Principal" {{ ($guru->jabatan == 'Principal') ? 'selected' : '' }}>Principal</option>
-                    <option value="Counselor" {{ ($guru->jabatan == 'Counselor') ? 'selected' : '' }}>Counselor</option>
-                    <option value="School_Coordinator" {{ ($guru->jabatan == 'School_Coordinator') ? 'selected' : '' }}>School_Coordinator</option>
-                    <option value="Homeroom" {{ ($guru->jabatan == 'Homeroom') ? 'selected' : '' }}>Homeroom</option>
-                    <option value="Head_of_department" {{ ($guru->jabatan == 'Head_of_department') ? 'selected' : '' }}>Head_of_department</option>
-                    <option value="Science_Lab_Coordinator" {{ ($guru->jabatan == 'Science_Lab_Coordinator') ? 'selected' : '' }}>Science_Lab_Coordinator</option>
-                    <option value="Lab_Assistant" {{ ($guru->jabatan == 'Lab_Assistant') ? 'selected' : '' }}>Lab_Assistant</option>
+                      <option value="1" {{ ($semester == '1') ? 'selected' : '' }}>1</option>
+                      <option value="2" {{ ($semester == '2') ? 'selected' : '' }}>2</option>
                 </select>
-                  @error('jabatan')
+                  @error('semester')
                     <div class="invalid-feedback">
                       {{ $message }}
                     </div>
@@ -102,10 +94,18 @@
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="tanggal_masuk" class="col-sm-2 col-form-label">Tanggal Masuk</label>
+                <label for="jenjang" class="col-sm-2 col-form-label">Jenjang</label>
                 <div class="col-sm-9">
-                  <input type="date" class="form-control @error('tanggal_masuk') is-invalid @enderror" name="tanggal_masuk" id="tanggal_masuk" placeholder="masukan tanggal_masuk" required value="{{ old('tanggal_masuk', $guru->tanggal_masuk) }}">
-                  @error('tanggal_masuk')
+                  <select class="form-select @error('jenjang') is-invalid @enderror" aria-label="Default select example" name="jenjang" id="jenjang" required>
+                    <option selected>pilih</option>
+                    <option value="7" {{ ($jenjang == '7') ? 'selected' : '' }}>7</option>
+                    <option value="8" {{ ($jenjang == '8') ? 'selected' : '' }}>8</option>
+                    <option value="9" {{ ($jenjang == '9') ? 'selected' : '' }}>9</option>
+                    <option value="10" {{ ($jenjang == '10') ? 'selected' : '' }}>10</option>
+                    <option value="11" {{ ($jenjang == '11') ? 'selected' : '' }}>11</option>
+                    <option value="12" {{ ($jenjang == '12') ? 'selected' : '' }}>12</option>
+                </select>
+                  @error('jenjang')
                     <div class="invalid-feedback">
                       {{ $message }}
                     </div>
