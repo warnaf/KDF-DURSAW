@@ -18,4 +18,8 @@ class Department extends Model
         'nama_department'
     ];
     protected $hidden;
+
+    // public function guru() {
+    //     return $this->hasMany(Guru::class);
+    // }
 }
