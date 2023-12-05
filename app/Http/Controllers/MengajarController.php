@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Mengajar;
 use App\Models\Guru;
 use App\Models\DetailMataPelajaran;
-// use App\Models\MataPelajaran;
+use App\Models\MataPelajaran;
 use Illuminate\Support\Facades\DB;
+use League\CommonMark\Extension\Mention\Mention;
 
 class MengajarController extends Controller
 {
@@ -26,25 +27,27 @@ class MengajarController extends Controller
     }
 
     public function create() {
-        return view('detailMataPelajaran.formDetailMatpel', [
-            'title' => 'Form Detail Matpel',
-            'mengajar' => Mengajar::all()
+        $detail_pelajaran = DB::table('detail_mata_pelajaran')
+                        ->leftJoin('mata_pelajaran', 'mata_pelajaran.id' ,'=', 'detail_mata_pelajaran.mata_pelajaran_ref')
+                        ->select('detail_mata_pelajaran.id', 'mata_pelajaran.nama_mata_pelajara')
+                        ->get();
+        return view('mengajar.formMengajar', [
+            'title' => 'Form Mengajar',
+            'pelajaran' => $detail_pelajaran,
+            'guru' => Guru::all()
             
         ]);
     }
 
     public function store(Request $request) {
         $validateData = $request->validate([
-            'id' => 'required|max:6|unique:detail_mata_pelajaran',
-            'mata_pelajaran_ref' => 'required',
-            'jumlah_jam' => 'required',
-            'max_jam' => 'required',
-            'semester' => 'required',
-            'jenjang' => 'required'
+            'id' => 'required|max:6|unique:mengajar',
+            'id_detail_mata_pelajaran' => 'required',
+            'id_guru' => 'required'
         ]);
 
         Mengajar::create($validateData);
-        return redirect('/detailMatpel')->with('success', 'New data has been added!');
+        return redirect('/mengajar')->with('success', 'New data has been added!');
     }
 
     public function edit(Mengajar $detail_mata_pelajaran, $id) {
@@ -75,10 +78,10 @@ class MengajarController extends Controller
         return redirect('/detailMatpel')->with('success', 'New data has been update!');
     }
 
-    public function destroy(Mengajar $detail_mata_pelajaran, $id) {
-        $data = $detail_mata_pelajaran->find($id);
-        $data->delete();
-        // DetailMataPelajaran::destroy($detail_mata_pelajaran->id);
-        return redirect('/detailMatpel')->with('success', 'Data has been deleted!');
+    public function destroy(Mengajar $mengajar) {
+        // $data = $mengajar->find($id);
+        // $data->delete();
+        Mengajar::destroy($mengajar->id);
+        return redirect('/mengajar')->with('success', 'Data has been deleted!');
     }
 }
