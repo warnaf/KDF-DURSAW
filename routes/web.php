@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JadwalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
@@ -26,6 +27,10 @@ Route::get('/home', function () {
         "title" => "Home"
     ]);
 });
+
+// route tampli jadwal
+Route::get('/generate', [JadwalController::class, 'viewGenerate']);
+Route::get('/generate/create', [JadwalController::class, 'generateJadwal']);
 
 // route tampil tabel kelas
 Route::resource('/kelas', KelasController::class);
