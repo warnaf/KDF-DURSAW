@@ -50,32 +50,29 @@ class MengajarController extends Controller
         return redirect('/mengajar')->with('success', 'New data has been added!');
     }
 
-    public function edit(Mengajar $detail_mata_pelajaran, $id) {
-        $data = $detail_mata_pelajaran->find($id);
-        return view('detailMataPelajaran.editDetailMatpel')->with([
-            'title' => 'Edit Detail Pelajaran',
-            'id' => $id,
-            'mata_pelajaran_ref' => $data->mata_pelajaran_ref,
-            'jumlah_jam' => $data->jumlah_jam,
-            'max_jam' => $data->max_jam,
-            'semester' => $data->semester,
-            'jenjang' => $data->jenjang,
-            // 'detail_mata_pelajaran' => $detail_mata_pelajaran,
-            'detail_pelajaran' => DetailMataPelajaran::all()
+    public function edit(Mengajar $mengajar) {
+        // $data = $mengajar->find($id);
+        $detail = DB::table('detail_mata_pelajaran')
+                        ->leftJoin('mata_pelajaran', 'mata_pelajaran.id' ,'=', 'detail_mata_pelajaran.mata_pelajaran_ref')
+                        ->select('detail_mata_pelajaran.id', 'mata_pelajaran.nama_mata_pelajara')
+                        ->get();
+        return view('mengajar.editMengajar')->with([
+            'title' => 'Edit Mengajar',
+            // 'id' => $data->id,
+            'mengajar' => $mengajar,
+            'guru' => Guru::all(),
+            'detail_pelajaran' => $detail
         ]);
     }
 
-    public function update(Request $request, Mengajar $detail_mata_pelajaran, $id) {
-        $data = $detail_mata_pelajaran->find($id);
+    public function update(Request $request, Mengajar $mengajar) {
+        $data = Mengajar::find($mengajar->id);
         // $data->id = $request->id;
-        $data->mata_pelajaran_ref = $request->mata_pelajaran_ref;
-        $data->jumlah_jam = $request->jumlah_jam;
-        $data->max_jam = $request->max_jam;
-        $data->semester = $request->semester;
-        $data->jenjang = $request->jenjang;
+        $data->id_detail_mata_pelajaran = $request->id_detail_mata_pelajaran;
+        $data->id_guru = $request->id_guru;
         $data->save();
         
-        return redirect('/detailMatpel')->with('success', 'New data has been update!');
+        return redirect('/mengajar')->with('success', 'New data has been update!');
     }
 
     public function destroy(Mengajar $mengajar) {
