@@ -49,7 +49,10 @@
               <div class="row mb-3">
                 <label for="is_penjuruan" class="col-sm-2 col-form-label">Penjuruan</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('is_penjuruan') is-invalid @enderror" name="is_penjuruan" id="is_penjuruan" placeholder="isi penjuruan" required value="{{ old('is_penjuruan',  $is_penjuruan) }}">
+                  <select class="form-select @error('is_penjuruan') is-invalid @enderror" aria-label="Default select example" name="is_penjuruan" id="is_penjuruan" required>
+                    <option selected value="0" {{ ($is_penjuruan== '0') ? 'selected' : '' }}>No</option>
+                    <option value="1" {{ ($is_penjuruan== '1') ? 'selected' : '' }}>Yes</option>
+                  </select>
                   @error('is_penjuruan')
                     <div class="invalid-feedback">
                       {{ $message }}
