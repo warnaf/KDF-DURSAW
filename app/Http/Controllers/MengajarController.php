@@ -17,8 +17,8 @@ class MengajarController extends Controller
                 ->join('detail_mata_pelajaran', 'detail_mata_pelajaran.id', '=', 'mengajar.id_detail_mata_pelajaran')
                 ->join('mata_pelajaran', 'mata_pelajaran.id' ,'=', 'detail_mata_pelajaran.mata_pelajaran_ref')
                 ->join('guru', 'guru.id' ,'=', 'mengajar.id_guru')
-                ->select('mengajar.*', 'mata_pelajaran.nama_mata_pelajara', 'guru.nama_guru')
-                ->orderBy('mengajar.id' , 'asc')
+                ->select('mengajar.*', 'mata_pelajaran.nama_mata_pelajara','detail_mata_pelajaran.jenjang', 'guru.nama_guru')
+                ->orderBy('mengajar.id' , 'desc')
                 ->get();
         return view('mengajar.dataMengajar', [
             'title' => 'Data Mengajar'
@@ -29,7 +29,7 @@ class MengajarController extends Controller
     public function create() {
         $detail_pelajaran = DB::table('detail_mata_pelajaran')
                         ->leftJoin('mata_pelajaran', 'mata_pelajaran.id' ,'=', 'detail_mata_pelajaran.mata_pelajaran_ref')
-                        ->select('detail_mata_pelajaran.id', 'mata_pelajaran.nama_mata_pelajara')
+                        ->select('detail_mata_pelajaran.id','detail_mata_pelajaran.jenjang', 'mata_pelajaran.nama_mata_pelajara')
                         ->get();
         return view('mengajar.formMengajar', [
             'title' => 'Form Mengajar',
@@ -54,7 +54,7 @@ class MengajarController extends Controller
         // $data = $mengajar->find($id);
         $detail = DB::table('detail_mata_pelajaran')
                         ->leftJoin('mata_pelajaran', 'mata_pelajaran.id' ,'=', 'detail_mata_pelajaran.mata_pelajaran_ref')
-                        ->select('detail_mata_pelajaran.id', 'mata_pelajaran.nama_mata_pelajara')
+                        ->select('detail_mata_pelajaran.id', 'mata_pelajaran.nama_mata_pelajara','detail_mata_pelajaran.jenjang')
                         ->get();
         return view('mengajar.editMengajar')->with([
             'title' => 'Edit Mengajar',

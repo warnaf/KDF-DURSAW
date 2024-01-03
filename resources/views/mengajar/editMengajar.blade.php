@@ -42,9 +42,9 @@
                     <option selected>pilih</option>
                     @foreach ($detail_pelajaran as $mp)
                     @if(old('id_detail_mata_pelajaran', $mengajar->id_detail_mata_pelajaran) == $mp->id)
-                      <option value="{{ $mp->id }}" selected>{{ $mp->nama_mata_pelajara }}</option>
+                      <option value="{{ $mp->id }}" selected>{{ $mp->nama_mata_pelajara }} {{ $mp->jenjang }}</option>
                     @else 
-                      <option value="{{ $mp->id }}" >{{ $mp->nama_mata_pelajara }}</option>
+                      <option value="{{ $mp->id }}" >{{ $mp->nama_mata_pelajara }} {{ $mp->jenjang }}</option>
                     @endif 
                     @endforeach
                   </select>
