@@ -19,15 +19,21 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><i class="bi bi-download"></i> Edit Data Mata Pelajaran</h5>
+            @if(session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <hr>
             <!-- General Form Elements -->
-            <form class="mt-4" method="post" action="/matpel/{{ $id }}">
+            <form class="mt-4" method="post" action="/matpel/{{ $data->id }}">
               @method('put')
               @csrf
               <div class="row mb-3">
                 <label for="id" class="col-sm-2 col-form-label">Kode Matpel</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('id') is-invalid @enderror" name="id" id="id" placeholder="masukan kode mata pelajaran" required value="{{ old('id', $id) }}" readonly>
+                  <input type="text" class="form-control @error('id') is-invalid @enderror" name="id" id="id" placeholder="masukan kode mata pelajaran" required value="{{ old('id', $data->id) }}" readonly>
                   {{-- @error('id')
                     <div class="invalid-feedback">
                       {{ $message }}
@@ -38,7 +44,7 @@
               <div class="row mb-3">
                 <label for="nama_mata_pelajara" class="col-sm-2 col-form-label">Nama Matpel</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('nama_mata_pelajara') is-invalid @enderror" name="nama_mata_pelajara" id="nama_mata_pelajara" placeholder="masukan mata pelajaran" required value="{{ old('nama_mata_pelajara',  $nama_mata_pelajara) }}">
+                  <input type="text" class="form-control @error('nama_mata_pelajara') is-invalid @enderror" name="nama_mata_pelajara" id="nama_mata_pelajara" placeholder="masukan mata pelajaran" required value="{{ old('nama_mata_pelajara',  $data->nama_mata_pelajara) }}">
                   @error('nama_mata_pelajara')
                     <div class="invalid-feedback">
                       {{ $message }}
@@ -50,8 +56,8 @@
                 <label for="is_penjuruan" class="col-sm-2 col-form-label">Penjuruan</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('is_penjuruan') is-invalid @enderror" aria-label="Default select example" name="is_penjuruan" id="is_penjuruan" required>
-                    <option selected value="0" {{ ($is_penjuruan== '0') ? 'selected' : '' }}>No</option>
-                    <option value="1" {{ ($is_penjuruan== '1') ? 'selected' : '' }}>Yes</option>
+                    <option value="0" {{ ($data->is_penjuruan== '0') ? 'selected' : '' }}>No</option>
+                    <option value="1" {{ ($data->is_penjuruan== '1') ? 'selected' : '' }}>Yes</option>
                   </select>
                   @error('is_penjuruan')
                     <div class="invalid-feedback">
