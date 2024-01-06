@@ -38,10 +38,10 @@
                 <label class="col-sm-2 col-form-label">Nama Pelajaran</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('id_detail_mata_pelajaran') is-invalid @enderror" aria-label="Default select example" name="id_detail_mata_pelajaran" id="id_detail_mata_pelajaran" required>
-                    <option selected>pilih</option>
+                    <option value="">pilih</option>
                     @foreach ($pelajaran as $dp)
                     @if(old('id_detail_mata_pelajaran') == $dp->id)
-                      <option value="{{ $dp->id }}" >{{ $dp->nama_mata_pelajara }} {{ $dp->jenjang }}</option>
+                      <option value="{{ $dp->id }}" selected>{{ $dp->nama_mata_pelajara }} {{ $dp->jenjang }}</option>
                     @else 
                       <option value="{{ $dp->id }}" >{{ $dp->nama_mata_pelajara }} {{ $dp->jenjang }}</option>
                     @endif 
@@ -58,7 +58,7 @@
                 <label class="col-sm-2 col-form-label">Nama Guru</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('id_guru') is-invalid @enderror" aria-label="Default select example" name="id_guru" id="id_guru" required>
-                    <option selected>pilih</option>
+                    <option value="">pilih</option>
                     @foreach ($guru as $g)
                     @if(old('id_guru') == $g->id)
                       <option value="{{ $g->id }}" selected>{{ $g->nama_guru }}</option>

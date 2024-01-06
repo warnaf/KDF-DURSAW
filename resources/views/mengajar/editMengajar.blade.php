@@ -19,6 +19,12 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><i class="bi bi-download"></i> Edit Data Mengajar</h5>
+            @if(session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <hr>
             <!-- General Form Elements -->
             <form class="mt-4" method="post" action="/mengajar/{{ $mengajar->id }}">
@@ -39,7 +45,7 @@
                 <label class="col-sm-2 col-form-label">Nama Pelajaran</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('id_detail_mata_pelajaran') is-invalid @enderror" aria-label="Default select example" name="id_detail_mata_pelajaran" id="id_detail_mata_pelajaran" required>
-                    <option selected>pilih</option>
+                    <option value="">pilih</option>
                     @foreach ($detail_pelajaran as $mp)
                     @if(old('id_detail_mata_pelajaran', $mengajar->id_detail_mata_pelajaran) == $mp->id)
                       <option value="{{ $mp->id }}" selected>{{ $mp->nama_mata_pelajara }} {{ $mp->jenjang }}</option>
@@ -59,7 +65,7 @@
                 <label class="col-sm-2 col-form-label">Nama Guru</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('id_guru') is-invalid @enderror" aria-label="Default select example" name="id_guru" id="id_guru" required>
-                    <option selected>pilih</option>
+                    <option value="">pilih</option>
                     @foreach ($guru as $g)
                     @if(old('id_guru', $mengajar->id_guru) == $g->id)
                       <option value="{{ $g->id }}" selected>{{ $g->nama_guru }}</option>
