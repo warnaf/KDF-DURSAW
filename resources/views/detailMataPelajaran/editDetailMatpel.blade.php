@@ -19,15 +19,21 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><i class="bi bi-download"></i> Edit Data Detail Pelajaran</h5>
+            @if(session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <hr>
             <!-- General Form Elements -->
-            <form class="mt-4" method="post" action="/detailMatpel/{{ $id }}">
+            <form class="mt-4" method="post" action="/detailMatpel/{{ $detail_mata_pelajaran->id }}">
               @method('put')
               @csrf
               <div class="row mb-3">
                 <label for="id" class="col-sm-2 col-form-label">Kode Pelajaran</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('id') is-invalid @enderror" name="id" id="id" placeholder="masukan kode pelajaran" required value="{{ old('id', $id) }}" readonly>
+                  <input type="text" class="form-control @error('id') is-invalid @enderror" name="id" id="id" placeholder="masukan kode pelajaran" required value="{{ old('id', $detail_mata_pelajaran->id) }}" readonly>
                   {{-- @error('id')
                     <div class="invalid-feedback">
                       {{ $message }}
@@ -39,9 +45,9 @@
                 <label class="col-sm-2 col-form-label">Nama Pelajaran</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('mata_pelajaran_ref') is-invalid @enderror" aria-label="Default select example" name="mata_pelajaran_ref" id="mata_pelajaran_ref" required>
-                    <option selected>pilih</option>
+                    <option value="">pilih</option>
                     @foreach ($mata_pelajaran as $mp)
-                    @if(old('mata_pelajaran_ref', $mata_pelajaran_ref) == $mp->id)
+                    @if(old('mata_pelajaran_ref', $detail_mata_pelajaran->mata_pelajaran_ref) == $mp->id)
                       <option value="{{ $mp->id }}" selected>{{ $mp->nama_mata_pelajara }}</option>
                     @else 
                       <option value="{{ $mp->id }}" >{{ $mp->nama_mata_pelajara }}</option>
@@ -58,7 +64,7 @@
               <div class="row mb-3">
                 <label for="jumlah_jam" class="col-sm-2 col-form-label">Jumlah Jam</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('jumlah_jam') is-invalid @enderror" name="jumlah_jam" id="jumlah_jam" placeholder="isi jumlah jam pelajaran" required value="{{ old('jumlah_jam', $jumlah_jam) }}">
+                  <input type="text" class="form-control @error('jumlah_jam') is-invalid @enderror" name="jumlah_jam" id="jumlah_jam" placeholder="isi jumlah jam pelajaran" required value="{{ old('jumlah_jam', $detail_mata_pelajaran->jumlah_jam) }}">
                   @error('jumlah_jam')
                     <div class="invalid-feedback">
                       {{ $message }}
@@ -69,7 +75,7 @@
               <div class="row mb-3">
                 <label for="max_jam" class="col-sm-2 col-form-label">Maksimal Jam</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('max_jam') is-invalid @enderror" name="max_jam" id="max_jam" placeholder="isi jumlah maksimal jam pelajaran" required value="{{ old('max_jam', $max_jam) }}">
+                  <input type="text" class="form-control @error('max_jam') is-invalid @enderror" name="max_jam" id="max_jam" placeholder="isi jumlah maksimal jam pelajaran" required value="{{ old('max_jam', $detail_mata_pelajaran->max_jam) }}">
                   @error('max_jam')
                     <div class="invalid-feedback">
                       {{ $message }}
@@ -82,9 +88,9 @@
                 <label for="semester" class="col-sm-2 col-form-label">Semester</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('semester') is-invalid @enderror" aria-label="Default select example" name="semester" id="semester" required>
-                    <option selected>pilih</option>
-                      <option value="1" {{ ($semester == '1') ? 'selected' : '' }}>1</option>
-                      <option value="2" {{ ($semester == '2') ? 'selected' : '' }}>2</option>
+                    <option value="">pilih</option>
+                      <option value="1" {{ ($detail_mata_pelajaran->semester == '1') ? 'selected' : '' }}>1</option>
+                      <option value="2" {{ ($detail_mata_pelajaran->semester == '2') ? 'selected' : '' }}>2</option>
                 </select>
                   @error('semester')
                     <div class="invalid-feedback">
@@ -97,13 +103,13 @@
                 <label for="jenjang" class="col-sm-2 col-form-label">Jenjang</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('jenjang') is-invalid @enderror" aria-label="Default select example" name="jenjang" id="jenjang" required>
-                    <option selected>pilih</option>
-                    <option value="7" {{ ($jenjang == '7') ? 'selected' : '' }}>7</option>
-                    <option value="8" {{ ($jenjang == '8') ? 'selected' : '' }}>8</option>
-                    <option value="9" {{ ($jenjang == '9') ? 'selected' : '' }}>9</option>
-                    <option value="10" {{ ($jenjang == '10') ? 'selected' : '' }}>10</option>
-                    <option value="11" {{ ($jenjang == '11') ? 'selected' : '' }}>11</option>
-                    <option value="12" {{ ($jenjang == '12') ? 'selected' : '' }}>12</option>
+                    <option value="">pilih</option>
+                    <option value="7" {{ ($detail_mata_pelajaran->jenjang == '7') ? 'selected' : '' }}>7</option>
+                    <option value="8" {{ ($detail_mata_pelajaran->jenjang == '8') ? 'selected' : '' }}>8</option>
+                    <option value="9" {{ ($detail_mata_pelajaran->jenjang == '9') ? 'selected' : '' }}>9</option>
+                    <option value="10" {{ ($detail_mata_pelajaran->jenjang == '10') ? 'selected' : '' }}>10</option>
+                    <option value="11" {{ ($detail_mata_pelajaran->jenjang == '11') ? 'selected' : '' }}>11</option>
+                    <option value="12" {{ ($detail_mata_pelajaran->jenjang == '12') ? 'selected' : '' }}>12</option>
                 </select>
                   @error('jenjang')
                     <div class="invalid-feedback">

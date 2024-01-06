@@ -42,7 +42,7 @@ class MataPelajaranController extends Controller
 
          // Jika validasi gagal, kembalikan respon dengan pesan kesalahan
          if ($validateData->fails()) {
-            return redirect('/kelas/create')
+            return redirect('/matpel/create')
                 ->withErrors($validateData)
                 ->withInput();
         }
