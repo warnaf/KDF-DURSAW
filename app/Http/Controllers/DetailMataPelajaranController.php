@@ -15,7 +15,7 @@ class DetailMataPelajaranController extends Controller
         $data = DB::table('detail_mata_pelajaran')
                 ->join('mata_pelajaran', 'mata_pelajaran.id' ,'=', 'detail_mata_pelajaran.mata_pelajaran_ref')
                 ->select('detail_mata_pelajaran.*', 'mata_pelajaran.nama_mata_pelajara')
-                ->orderBy('detail_mata_pelajaran.id' , 'asc')
+                ->orderBy('detail_mata_pelajaran.id' , 'desc')
                 ->get();
         return view('detailMataPelajaran.dataDetailMatpel', [
             'title' => 'Data Detail Mata Pelajaran'

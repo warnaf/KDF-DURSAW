@@ -15,7 +15,7 @@ class GuruController extends Controller
         $data = DB::table('guru')
                 ->join('departments', 'departments.id' ,'=', 'guru.department_id')
                 ->select('guru.*', 'departments.nama_department')
-                ->orderBy('guru.id' , 'asc')
+                ->orderBy('guru.id' , 'desc')
                 ->get();
         return view('guru.dataGuru', [
             'title' => 'Data Guru'

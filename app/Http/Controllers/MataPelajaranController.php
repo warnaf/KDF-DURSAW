@@ -12,7 +12,7 @@ class MataPelajaranController extends Controller
     public function index() {
         return view('mataPelajaran.dataMatpel', [
             'title' => 'Data Mata Pelajaran',
-            'dataMatpel' => MataPelajaran::all()
+            'dataMatpel' => MataPelajaran::orderBy('id', 'desc')->get()
         ]);
     }
 

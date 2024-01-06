@@ -12,7 +12,7 @@ class DepartmentController extends Controller
     public function index() {
         return view('department.dataDepartment', [
             'title' => 'Data Department',
-            'dataDepartment' => Department::all()
+            'dataDepartment' => Department::orderBy('id', 'desc')->get()
         ]);
     }
 
