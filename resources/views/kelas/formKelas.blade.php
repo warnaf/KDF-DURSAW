@@ -38,7 +38,7 @@
                 <label class="col-sm-2 col-form-label">Jenjang</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('jenjang') is-invalid @enderror" aria-label="Default select example" name="jenjang" id="jenjang" required>
-                      <option selected>pilih jenjang</option>
+                      <option value="">pilih jenjang</option>
                       <option value="7" {{ (old('jenjang')== '7') ? 'selected' : '' }}>7</option>
                       <option value="8" {{ (old('jenjang')== '8') ? 'selected' : '' }}>8</option>
                       <option value="9" {{ (old('jenjang')== '9') ? 'selected' : '' }}>9</option>
@@ -68,7 +68,7 @@
                 <label class="col-sm-2 col-form-label">Jurusan</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('jurusan') is-invalid @enderror" aria-label="Default select example" name="jurusan" id="jurusan" required>
-                    <option selected>pilih jurusan</option>
+                    <option value="">pilih jurusan</option>
                     <option value="IPA" {{ (old('jurusan')== 'IPA') ? 'selected' : '' }}>IPA</option>
                     <option value="IPS" {{ (old('jurusan')== 'IPS') ? 'selected' : '' }}>IPS</option>
                     <option value="SMP" {{ (old('jurusan')== 'SMP') ? 'selected' : '' }}>SMP</option>

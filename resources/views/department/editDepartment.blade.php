@@ -19,15 +19,21 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><i class="bi bi-download"></i> Edit Data Department</h5>
+            @if(session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <hr>
             <!-- General Form Elements -->
-            <form class="mt-4" method="post" action="/department/{{ $id }}">
+            <form class="mt-4" method="post" action="/department/{{ $data->id }}">
               @method('put')
               @csrf
               <div class="row mb-3">
                 <label for="id" class="col-sm-2 col-form-label">Kode Kelas</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('id') is-invalid @enderror" name="id" id="id" placeholder="masukan kode kelas" required value="{{ old('id', $id) }}" readonly>
+                  <input type="text" class="form-control @error('id') is-invalid @enderror" name="id" id="id" placeholder="masukan kode kelas" required value="{{ old('id', $data->id) }}" readonly>
                   {{-- @error('id')
                     <div class="invalid-feedback">
                       {{ $message }}
@@ -38,7 +44,7 @@
               <div class="row mb-3">
                 <label for="nama_department" class="col-sm-2 col-form-label">Nama Department</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('nama_department') is-invalid @enderror" name="nama_department" id="nama_department" placeholder="masukan nama department" required value="{{ old('nama_department',  $nama_department) }}">
+                  <input type="text" class="form-control @error('nama_department') is-invalid @enderror" name="nama_department" id="nama_department" placeholder="masukan nama department" required value="{{ old('nama_department',  $data->nama_department) }}">
                   @error('nama_department')
                     <div class="invalid-feedback">
                       {{ $message }}

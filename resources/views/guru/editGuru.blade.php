@@ -19,6 +19,12 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><i class="bi bi-download"></i> Edit Data Guru</h5>
+            @if(session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <hr>
             <!-- General Form Elements -->
             <form class="mt-4" method="post" action="/guru/{{ $guru->id }}">
@@ -50,7 +56,7 @@
                 <label class="col-sm-2 col-form-label">Gender</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('jenis_kelamin') is-invalid @enderror" aria-label="Default select example" name="jenis_kelamin" id="jenis_kelamin" required>
-                      <option selected>pilih</option>
+                      <option value="">pilih</option>
                       <option value="L" {{ ($guru->jenis_kelamin == 'L') ? 'selected' : '' }}>Laki - laki</option>
                       <option value="P" {{ ($guru->jenis_kelamin == 'P') ? 'selected' : '' }}>Perempuan</option>
                   </select>
@@ -65,7 +71,7 @@
                 <label class="col-sm-2 col-form-label">Department</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('department_id') is-invalid @enderror" aria-label="Default select example" name="department_id" id="department_id" required>
-                    <option selected>pilih</option>
+                    <option value="">pilih</option>
                     @foreach ($departments as $d)
                     @if(old('department_id', $guru->department_id) == $d->id)
                       <option value="{{ $d->id }}" selected>{{ $d->nama_department }}</option>
@@ -85,7 +91,7 @@
                 <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('jabatan') is-invalid @enderror" aria-label="Default select example" name="jabatan" id="jabatan" required>
-                    <option selected>pilih</option>
+                    <option value="">pilih</option>
                     <option value="Principal" {{ ($guru->jabatan == 'Principal') ? 'selected' : '' }}>Principal</option>
                     <option value="Counselor" {{ ($guru->jabatan == 'Counselor') ? 'selected' : '' }}>Counselor</option>
                     <option value="School_Coordinator" {{ ($guru->jabatan == 'School_Coordinator') ? 'selected' : '' }}>School_Coordinator</option>

@@ -44,7 +44,14 @@
                   <th scope="row" class="text-center">{{ $loop->iteration }}</th>
                   <td>{{ $matpel->id }}</td>
                   <td>{{ $matpel->nama_mata_pelajara }}</td>
-                  <td>{{ $matpel->is_penjuruan }}</td>
+                  {{-- <td>{{ $matpel->is_penjuruan }}</td> --}}
+                  <td>
+                    @if( $matpel->is_penjuruan == '0' ) 
+                      {{ "No" }}
+                    @else
+                      {{ "Yes" }}
+                    @endif
+                  </td>
                   <td class="text-center">
                     <a href="/matpel/{{ $matpel->id }}/edit" class="btn btn-sm btn-warning"><span><i class="bi bi-pencil-square"></i> Edit</span></a>
                     <form action="/matpel/{{ $matpel->id }}" method="post" class="d-inline">
