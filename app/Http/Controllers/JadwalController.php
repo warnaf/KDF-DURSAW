@@ -29,18 +29,10 @@ class JadwalController extends Controller
             if($value == null){
                 Log::critical("ada yang null", $value);
             }
-
-            // if($maksimalJam != 0){
-                // $hasil[] = $value['id'];
-                if($value['jumlah_jam'] > 0 ){
-                    $hasil[] = $value['id'];
-                }
-            // }
-            // else{
-            //     if($value['jumlah_jam'] > 0){
-            //         $hasil[] = $value['id'];
-            //     }
-            // }
+            
+            if($value['jumlah_jam'] > 0 ){
+                $hasil[] = $value['id'];
+            }
         }
         return count($hasil) > 0 ? $hasil : false;
     }
@@ -450,47 +442,41 @@ class JadwalController extends Controller
                     continue;
                 }else if($u === 9){
                     continue;
-                }else{
-                    for ($j=0; $j < count($kelasKey); $j++) {
-                        $currentIdArray = self::peelingIdFromArray($cleanData[$kelasData[$j]]);
-                        if($currentIdArray == false){
-                            continue;
-                        }
-                        $randomId = Jadwal::getRandomId($currentIdArray, $jadwalReady, $u, $incrementKelas);
-                        if($randomId == false){
-                            continue;
-                        }
-                        $randomKey = self::findIndexInArray($cleanData[$kelasData[$j]], $randomId);
-                        $currentArray = &$cleanData[$kelasData[$j]][$randomKey];
-                        $penguranganJamKerja = min($currentArray['jumlah_jam'], 2);
-                        Log::info("Jam kerja: $penguranganJamKerja");
-                        $tambahanStep = 0;
-                        $tambahanNextStep = 0;
-                        for ($k=$u; $k < ($penguranganJamKerja + $u + $tambahanNextStep); $k++) {
-                            if($k > ($totalKelas - 1)){
-                                break;
-                            }else if($k === 0){
-                                $tambahanNextStep;
-                                continue;
-                            }else if($k === 5){
-                                $tambahanNextStep;
-                                continue;
-                            }else if($k === 9){
-                                $tambahanNextStep;
-                                continue;
-                            }else if($jadwalReady[$k + $tambahanStep][$incrementKelas] !== "BELAJAR"){
-                                $tambahanStep;
-                                $tambahanNextStep;
-                                continue;
-                            }
-                            $jadwalReady[$k + $tambahanStep][$incrementKelas] = $currentArray['id'];
-                            $currentArray['jumlah_jam'] -= 1;
-                        }
+                }
+                for ($j=0; $j < count($kelasKey); $j++) {
+                    $tambahCheckStep = 0;
+                    $currentIdArray = self::peelingIdFromArray($cleanData[$kelasData[$j]]);
+                    if($currentIdArray == false){
                         $incrementKelas++;
+                        continue;
                     }
+                    if($jadwalReady[$u][$incrementKelas] !== "BELAJAR"){
+                        $tambahCheckStep++;
+                    }
+                    if($u + $tambahCheckStep >= $totalKelas) $tambahCheckStep = 0;
+                    $randomId = Jadwal::getRandomId($currentIdArray, $jadwalReady, ($u + $tambahCheckStep), $incrementKelas);
+                    if($randomId == false){
+                        $incrementKelas++;
+                        continue;
+                    }
+                    $randomKey = self::findIndexInArray($cleanData[$kelasData[$j]], $randomId);
+                    $currentArray = &$cleanData[$kelasData[$j]][$randomKey];
+                    $penguranganJamKerja = min($currentArray['jumlah_jam'], 2);
+                    Log::info("Jam kerja: $penguranganJamKerja");
+                    for ($k=$u; $k < ($penguranganJamKerja + $u); $k++) {
+                        if($k >= $totalKelas){
+                            break;
+                        }
+                        if($jadwalReady[$k][$incrementKelas] !== "BELAJAR"){
+                            continue;
+                        }
+                        $jadwalReady[$k][$incrementKelas] = $currentArray['id'];
+                        $currentArray['jumlah_jam'] -= 1;
+                    }
+                    $incrementKelas++;
                 }
             }
-
+            // dd($incrementKelas);
             // $isCompleted = self::checkIsCompleted($jadwalReady);
             // if($isCompleted !== true){
             //     $kelasKeyBasis = [];
@@ -518,14 +504,14 @@ class JadwalController extends Controller
             // }
             $fullJadwal[$fullJadwalKeys[$a]] = $jadwalReady;
         }
-        // return $fullJadwal;
-        return ['jadwal' => $fullJadwal, 'sisa' => $cleanData];
+        return $fullJadwal;
+        // return ['jadwal' => $fullJadwal, 'sisa' => $cleanData];
     }
 
     //mengembalikan view dari hasil dari jadwal
     public function generateJadwal() {
         $jadwal = self::createJadwalTest();
-        return $jadwal;
+        // return $jadwal;
         $model = new Jadwal();
         $dataKelas = $model->data_kelas;
         $dataJam = $model->data_jam;

@@ -42,7 +42,7 @@ class Jadwal extends Model
             "jenjang" => 12,
             "nama_guru" => "Maria",
             "is_penjuruan" => 0,
-            "kelas" => ["9Y", "10R", "9R"],
+            "kelas" => ["9Y", "10R", "12W"],
         ],
         [
             "id" => 1,
@@ -78,7 +78,7 @@ class Jadwal extends Model
             "jenjang" => 12,
             "nama_guru" => "Bridget",
             "is_penjuruan" => 0,
-            "kelas" => ["12W", "9W", "12W"],
+            "kelas" => ["10W", "9W", "12W"],
         ],
         [
             "id" => 4,
@@ -114,7 +114,7 @@ class Jadwal extends Model
             "jenjang" => 7,
             "nama_guru" => "Charles",
             "is_penjuruan" => 1,
-            "kelas" => ["10Y", "7W", "8R"],
+            "kelas" => ["9Y", "7W", "8R"],
         ],
         [
             "id" => 7,
@@ -186,7 +186,7 @@ class Jadwal extends Model
             "jenjang" => 10,
             "nama_guru" => "Mullins",
             "is_penjuruan" => 0,
-            "kelas" => ["9R", "9Y", "10Y"],
+            "kelas" => ["9R", "9Y", "8R"],
         ],
         [
             "id" => 13,
@@ -198,7 +198,7 @@ class Jadwal extends Model
             "jenjang" => 8,
             "nama_guru" => "Dolores",
             "is_penjuruan" => 0,
-            "kelas" => ["10Y", "11R", "10R"],
+            "kelas" => ["7W", "11R", "10R"],
         ],
         [
             "id" => 14,
@@ -210,7 +210,7 @@ class Jadwal extends Model
             "jenjang" => 10,
             "nama_guru" => "Carla",
             "is_penjuruan" => 0,
-            "kelas" => ["7Y", "10Y", "9W"],
+            "kelas" => ["7Y", "11R", "9W"],
         ],
         [
             "id" => 15,
@@ -234,7 +234,7 @@ class Jadwal extends Model
             "jenjang" => 12,
             "nama_guru" => "Matthews",
             "is_penjuruan" => 1,
-            "kelas" => ["10R", "10Y", "8R"],
+            "kelas" => ["10R", "12W", "8R"],
         ],
         [
             "id" => 17,
@@ -258,7 +258,7 @@ class Jadwal extends Model
             "jenjang" => 8,
             "nama_guru" => "Reyna",
             "is_penjuruan" => 1,
-            "kelas" => ["10R", "10Y", "8R"],
+            "kelas" => ["10R", "12W", "8R"],
         ],
         [
             "id" => 19,
@@ -390,7 +390,7 @@ class Jadwal extends Model
             "jenjang" => 7,
             "nama_guru" => "Harris",
             "is_penjuruan" => 1,
-            "kelas" => ["10Y", "10R", "11W"],
+            "kelas" => ["11R", "10R", "11W"],
         ],
         [
             "id" => 30,
@@ -630,7 +630,7 @@ class Jadwal extends Model
             "jenjang" => 8,
             "nama_guru" => "Latoya",
             "is_penjuruan" => 0,
-            "kelas" => ["9W", "7R", "10Y"],
+            "kelas" => ["9W", "7R", "9Y"],
         ],
         [
             "id" => 50,
