@@ -755,15 +755,6 @@ class Jadwal extends Model
         }
         $randomKey = array_rand($availableNumbersFixed);
         $randomNumber = $availableNumbersFixed[$randomKey];
-        Log::info([
-            'verticalNumber' => $verticalNumbers,
-            'horizontalNumbers' => $horizontalNumbers,
-            'availableNumbersVertical' => $availableNumbersVertical,
-            'availableNumbersHorinzontal' => $availableNumbersHorinzontal,
-            'CurrentPosition' => $currenPosition,
-            'position' => $position,
-            'randomNumber' => $randomNumber
-        ]);
         return $randomNumber;
     }
 }

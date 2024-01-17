@@ -446,7 +446,7 @@ class JadwalController extends Controller
                 for ($j=0; $j < count($kelasKey); $j++) {
                     $tambahCheckStep = 0;
                     $currentIdArray = self::peelingIdFromArray($cleanData[$kelasData[$j]]);
-                    if($currentIdArray == false){
+                    if($currentIdArray === false){
                         $incrementKelas++;
                         continue;
                     }
@@ -455,15 +455,22 @@ class JadwalController extends Controller
                     }
                     if($u + $tambahCheckStep >= $totalKelas) $tambahCheckStep = 0;
                     $randomId = Jadwal::getRandomId($currentIdArray, $jadwalReady, ($u + $tambahCheckStep), $incrementKelas);
-                    if($randomId == false){
+                    Log::info([
+                        "randomId" => $randomId,
+                        "currentIdArray" => $currentIdArray,
+                        "u" => $u,
+                        "tambahCheckStep" => $tambahCheckStep,
+                        "u + tambahCheckStep" => $u + $tambahCheckStep,
+                        "incrementKelas" => $incrementKelas,
+                    ]);
+                    if($randomId === false){
                         $incrementKelas++;
                         continue;
                     }
                     $randomKey = self::findIndexInArray($cleanData[$kelasData[$j]], $randomId);
                     $currentArray = &$cleanData[$kelasData[$j]][$randomKey];
                     $penguranganJamKerja = min($currentArray['jumlah_jam'], 2);
-                    Log::info("Jam kerja: $penguranganJamKerja");
-                    for ($k=$u; $k < ($penguranganJamKerja + $u); $k++) {
+                    for ($k=$u; $k < ($penguranganJamKerja + $u + $tambahCheckStep); $k++) {
                         if($k >= $totalKelas){
                             break;
                         }
@@ -476,7 +483,6 @@ class JadwalController extends Controller
                     $incrementKelas++;
                 }
             }
-            // dd($incrementKelas);
             // $isCompleted = self::checkIsCompleted($jadwalReady);
             // if($isCompleted !== true){
             //     $kelasKeyBasis = [];
