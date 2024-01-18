@@ -455,14 +455,7 @@ class JadwalController extends Controller
                     }
                     if($u + $tambahCheckStep >= $totalKelas) $tambahCheckStep = 0;
                     $randomId = Jadwal::getRandomId($currentIdArray, $jadwalReady, ($u + $tambahCheckStep), $incrementKelas);
-                    Log::info([
-                        "randomId" => $randomId,
-                        "currentIdArray" => $currentIdArray,
-                        "u" => $u,
-                        "tambahCheckStep" => $tambahCheckStep,
-                        "u + tambahCheckStep" => $u + $tambahCheckStep,
-                        "incrementKelas" => $incrementKelas,
-                    ]);
+                    
                     if($randomId === false){
                         $incrementKelas++;
                         continue;
