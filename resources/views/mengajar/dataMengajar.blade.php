@@ -43,7 +43,7 @@
                 <tr>
                   <th scope="row" class="text-center">{{ $loop->iteration }}</th>
                   <td>{{ $mengajar->id }}</td>
-                  <td>{{ $mengajar->nama_mata_pelajara }}</td>
+                  <td>{{ $mengajar->nama_mata_pelajara }} {{ $mengajar->jenjang }}</td>
                   <td>{{ $mengajar->nama_guru }}</td>
                   <td class="text-center">
                     <a href="/mengajar/{{ $mengajar->id }}/edit" class="btn btn-sm btn-warning border-0"><span><i class="bi bi-pencil-square"></i> Edit</span></a>

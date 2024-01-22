@@ -38,7 +38,7 @@
                 <label class="col-sm-2 col-form-label">Nama Pelajaran</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('mata_pelajaran_ref') is-invalid @enderror" aria-label="Default select example" name="mata_pelajaran_ref" id="mata_pelajaran_ref" required>
-                    <option selected>pilih</option>
+                    <option value="">pilih</option>
                     @foreach ($detail_mata_pelajaran as $dmp)
                     @if(old('mata_pelajaran_ref') == $dmp->id)
                       <option value="{{ $dmp->id }}" selected>{{ $dmp->nama_mata_pelajara }}</option>
@@ -81,7 +81,7 @@
                 <label for="semester" class="col-sm-2 col-form-label">Semester</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('semester') is-invalid @enderror" aria-label="Default select example" name="semester" id="semester" required>
-                    <option selected>pilih</option>
+                    <option value="">pilih</option>
                     <option value="1" {{ (old('semester')== '1') ? 'selected' : '' }}>1</option>
                     <option value="2" {{ (old('semester')== '2') ? 'selected' : '' }}>2</option>
                 </select>
@@ -96,7 +96,7 @@
                 <label for="jenjang" class="col-sm-2 col-form-label">Jenjang</label>
                 <div class="col-sm-9">
                   <select class="form-select @error('jenjang') is-invalid @enderror" aria-label="Default select example" name="jenjang" id="jenjang" required>
-                    <option selected>pilih</option>
+                    <option value="">pilih</option>
                     <option value="7" {{ (old('jenjang')== '7') ? 'selected' : '' }}>7</option>
                     <option value="8" {{ (old('jenjang')== '8') ? 'selected' : '' }}>8</option>
                     <option value="9" {{ (old('jenjang')== '9') ? 'selected' : '' }}>9</option>
