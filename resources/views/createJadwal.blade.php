@@ -37,6 +37,15 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+    {{-- <style>
+        table thead {
+            position: -webkit-sticky; // this is for all Safari (Desktop & iOS), not for Chrome
+            position: sticky;
+            top: 0;
+            z-index: 1; // any positive value, layer order is global
+            background: #fff; // any bg-color to overlap
+        }
+    </style> --}}
 </head>
 
 <body>

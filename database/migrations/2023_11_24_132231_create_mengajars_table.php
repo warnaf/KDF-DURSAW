@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('id', 6);
             $table->string('id_detail_mata_pelajaran', 6);
             $table->string('id_guru', 6);
+            $table->string('id_kelas', 6);
 
             $table->primary('id');
             $table->foreign('id_detail_mata_pelajaran')
