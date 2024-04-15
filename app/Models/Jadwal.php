@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Nette\Utils\Arrays;
 
 class Jadwal extends Model
 {
@@ -31,9 +32,14 @@ class Jadwal extends Model
         '12' => ['12W'],
     ];
     
+    //jika ada data yang sulit untuk di join gunakan mapping saja
+    //tambahan data preferredDay, preferredTime yang nanti di tambahkan pada table ...
+    //ekspetasi preferredDay dan preferredTime adalah 0,1,2,3,4...
     public $data_mengajar = [
         [
             "id" => "1",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP011",
             "nama_mata_pelajara" => "PKn",
             "jumlah_jam" => 7,
@@ -45,6 +51,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "2",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP018",
             "nama_mata_pelajara" => "PrBL",
             "jumlah_jam" => 6,
@@ -56,6 +64,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "3",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP018",
             "nama_mata_pelajara" => "PrBL",
             "jumlah_jam" => 6,
@@ -67,6 +77,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "4",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP025",
             "nama_mata_pelajara" => "Entre",
             "jumlah_jam" => 6,
@@ -78,6 +90,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "5",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP030",
             "nama_mata_pelajara" => "CS",
             "jumlah_jam" => 6,
@@ -89,6 +103,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "6",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP011",
             "nama_mata_pelajara" => "Mandarin",
             "jumlah_jam" => 6,
@@ -100,6 +116,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "7",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP004",
             "nama_mata_pelajara" => "Math",
             "jumlah_jam" => 6,
@@ -111,6 +129,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "8",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP023",
             "nama_mata_pelajara" => "Mat IPA/IPS",
             "jumlah_jam" => 6,
@@ -122,6 +142,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "9",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP012",
             "nama_mata_pelajara" => "PKn",
             "jumlah_jam" => 6,
@@ -133,6 +155,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "10",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP005",
             "nama_mata_pelajara" => "Math",
             "jumlah_jam" => 2,
@@ -144,6 +168,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "11",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP024",
             "nama_mata_pelajara" => "Mat IPA/IPS",
             "jumlah_jam" => 2,
@@ -155,6 +181,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "12",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP003",
             "nama_mata_pelajara" => "English",
             "jumlah_jam" => 2,
@@ -166,6 +194,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "13",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP004",
             "nama_mata_pelajara" => "Literature",
             "jumlah_jam" => 4,
@@ -177,6 +207,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "14",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP005",
             "nama_mata_pelajara" => "Math",
             "jumlah_jam" => 2,
@@ -188,6 +220,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "15",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP025",
             "nama_mata_pelajara" => "Mat IPA/IPS",
             "jumlah_jam" => 6,
@@ -199,6 +233,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "16",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP003",
             "nama_mata_pelajara" => "English",
             "jumlah_jam" => 6,
@@ -210,6 +246,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "17",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP005",
             "nama_mata_pelajara" => "Literature",
             "jumlah_jam" => 7,
@@ -221,6 +259,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "18",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP024",
             "nama_mata_pelajara" => "Reading",
             "jumlah_jam" => 7,
@@ -232,6 +272,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "19",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP025",
             "nama_mata_pelajara" => "Gen Eng",
             "jumlah_jam" => 7,
@@ -243,6 +285,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "20",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP029",
             "nama_mata_pelajara" => "GP",
             "jumlah_jam" => 7,
@@ -254,6 +298,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "21",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP028",
             "nama_mata_pelajara" => "Geography",
             "jumlah_jam" => 6,
@@ -265,6 +311,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "22",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP009",
             "nama_mata_pelajara" => "Chem",
             "jumlah_jam" => 6,
@@ -276,6 +324,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "23",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP029",
             "nama_mata_pelajara" => "GP",
             "jumlah_jam" => 6,
@@ -287,6 +337,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "24",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP007",
             "nama_mata_pelajara" => "Math",
             "jumlah_jam" => 6,
@@ -298,6 +350,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "25",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP006",
             "nama_mata_pelajara" => "Literature",
             "jumlah_jam" => 3,
@@ -309,6 +363,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "26",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP026",
             "nama_mata_pelajara" => "Gen Eng",
             "jumlah_jam" => 4,
@@ -320,6 +376,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "27",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP005",
             "nama_mata_pelajara" => "English",
             "jumlah_jam" => 4,
@@ -331,6 +389,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "28",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP026",
             "nama_mata_pelajara" => "Reading",
             "jumlah_jam" => 8,
@@ -342,6 +402,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "29",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP017",
             "nama_mata_pelajara" => "PE",
             "jumlah_jam" => 8,
@@ -353,6 +415,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "30",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP012",
             "nama_mata_pelajara" => "Bio",
             "jumlah_jam" => 6,
@@ -364,6 +428,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "31",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP017",
             "nama_mata_pelajara" => "Music",
             "jumlah_jam" => 6,
@@ -375,6 +441,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "32",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP017",
             "nama_mata_pelajara" => "PE",
             "jumlah_jam" => 3,
@@ -386,6 +454,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "33",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP024",
             "nama_mata_pelajara" => "GP",
             "jumlah_jam" => 3,
@@ -397,6 +467,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "34",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP027",
             "nama_mata_pelajara" => "Sociology",
             "jumlah_jam" => 3,
@@ -408,6 +480,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "35",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP009",
             "nama_mata_pelajara" => "Math",
             "jumlah_jam" => 6,
@@ -419,6 +493,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "36",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP011",
             "nama_mata_pelajara" => "Phy",
             "jumlah_jam" => 6,
@@ -430,6 +506,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "37",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP027",
             "nama_mata_pelajara" => "IPA AN",
             "jumlah_jam" => 8,
@@ -441,6 +519,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "38",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP015",
             "nama_mata_pelajara" => "Bio",
             "jumlah_jam" => 8,
@@ -452,6 +532,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "39",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP009",
             "nama_mata_pelajara" => "Math",
             "jumlah_jam" => 3,
@@ -463,6 +545,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "40",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP022",
             "nama_mata_pelajara" => "Mat IPA/IPS",
             "jumlah_jam" => 4,
@@ -474,6 +558,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "41",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP017",
             "nama_mata_pelajara" => "B.Indo",
             "jumlah_jam" => 4,
@@ -485,6 +571,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "42",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP027",
             "nama_mata_pelajara" => "PrBL",
             "jumlah_jam" => 6,
@@ -496,6 +584,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "43",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP025",
             "nama_mata_pelajara" => "Entre",
             "jumlah_jam" => 6,
@@ -507,6 +597,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "44",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP029",
             "nama_mata_pelajara" => "BS",
             "jumlah_jam" => 6,
@@ -518,6 +610,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "45",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP018",
             "nama_mata_pelajara" => "Art",
             "jumlah_jam" => 8,
@@ -529,6 +623,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "46",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP029",
             "nama_mata_pelajara" => "Entre",
             "jumlah_jam" => 8,
@@ -540,6 +636,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "47",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP016",
             "nama_mata_pelajara" => "Chem",
             "jumlah_jam" => 3,
@@ -551,6 +649,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "48",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP021",
             "nama_mata_pelajara" => "Religion",
             "jumlah_jam" => 3,
@@ -562,6 +662,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "49",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP017",
             "nama_mata_pelajara" => "B.Indo",
             "jumlah_jam" => 3,
@@ -573,6 +675,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "50",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP029",
             "nama_mata_pelajara" => "PrBL",
             "jumlah_jam" => 3,
@@ -584,6 +688,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "51",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP009",
             "nama_mata_pelajara" => "English",
             "jumlah_jam" => 3,
@@ -595,6 +701,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "52",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP023",
             "nama_mata_pelajara" => "TS",
             "jumlah_jam" => 4,
@@ -606,6 +714,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "53",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP022",
             "nama_mata_pelajara" => "Religion",
             "jumlah_jam" => 4,
@@ -617,6 +727,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "54",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP022",
             "nama_mata_pelajara" => "Religion",
             "jumlah_jam" => 4,
@@ -628,6 +740,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "55",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP016",
             "nama_mata_pelajara" => "Phy",
             "jumlah_jam" => 4,
@@ -639,6 +753,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "56",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP017",
             "nama_mata_pelajara" => "B.Indo",
             "jumlah_jam" => 4,
@@ -650,6 +766,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "57",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP018",
             "nama_mata_pelajara" => "PrBL",
             "jumlah_jam" => 2,
@@ -661,6 +779,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "58",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP010",
             "nama_mata_pelajara" => "English",
             "jumlah_jam" => 2,
@@ -672,6 +792,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "59",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP012",
             "nama_mata_pelajara" => "Literature",
             "jumlah_jam" => 2,
@@ -683,6 +805,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "60",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP024",
             "nama_mata_pelajara" => "Religion",
             "jumlah_jam" => 2,
@@ -694,6 +818,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "61",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP022",
             "nama_mata_pelajara" => "Art",
             "jumlah_jam" => 2,
@@ -705,6 +831,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "62",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP018",
             "nama_mata_pelajara" => "PrBL",
             "jumlah_jam" => 2,
@@ -716,6 +844,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "63",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP029",
             "nama_mata_pelajara" => "Entre",
             "jumlah_jam" => 2,
@@ -727,6 +857,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "64",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP024",
             "nama_mata_pelajara" => "DT",
             "jumlah_jam" => 2,
@@ -738,6 +870,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "65",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP018",
             "nama_mata_pelajara" => "SS",
             "jumlah_jam" => 3,
@@ -749,6 +883,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "66",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP018",
             "nama_mata_pelajara" => "PrBL",
             "jumlah_jam" => 2,
@@ -760,6 +896,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "67",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP025",
             "nama_mata_pelajara" => "Religion",
             "jumlah_jam" => 3,
@@ -771,6 +909,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "68",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP024",
             "nama_mata_pelajara" => "GP",
             "jumlah_jam" => 2,
@@ -782,6 +922,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "69",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP027",
             "nama_mata_pelajara" => "Sociology",
             "jumlah_jam" => 2,
@@ -793,6 +935,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "70",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP017",
             "nama_mata_pelajara" => "Bio",
             "jumlah_jam" => 2,
@@ -804,6 +948,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "71",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP019",
             "nama_mata_pelajara" => "IPA AN",
             "jumlah_jam" => 1,
@@ -815,6 +961,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "72",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP024",
             "nama_mata_pelajara" => "GP",
             "jumlah_jam" => 1,
@@ -826,6 +974,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "73",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP029",
             "nama_mata_pelajara" => "BS",
             "jumlah_jam" => 2,
@@ -837,6 +987,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "74",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP026",
             "nama_mata_pelajara" => "Econ",
             "jumlah_jam" => 2,
@@ -848,6 +1000,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "75",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP028",
             "nama_mata_pelajara" => "Religion",
             "jumlah_jam" => 6,
@@ -859,6 +1013,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "76",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP022",
             "nama_mata_pelajara" => "Mat IPA/IPS",
             "jumlah_jam" => 6,
@@ -870,6 +1026,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "77",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP016",
             "nama_mata_pelajara" => "English",
             "jumlah_jam" => 2,
@@ -881,6 +1039,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "78",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP017",
             "nama_mata_pelajara" => "Literature",
             "jumlah_jam" => 2,
@@ -892,6 +1052,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "79",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP020",
             "nama_mata_pelajara" => "Reading",
             "jumlah_jam" => 6,
@@ -903,6 +1065,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "80",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP018",
             "nama_mata_pelajara" => "Chem",
             "jumlah_jam" => 6,
@@ -914,6 +1078,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "81",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP019",
             "nama_mata_pelajara" => "IPA AN",
             "jumlah_jam" => 2,
@@ -925,6 +1091,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "82",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP9999",
             "nama_mata_pelajara" => "Chem/Geo/AM",
             "jumlah_jam" => 2,
@@ -936,6 +1104,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "83",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP9998",
             "nama_mata_pelajara" => "Econ/Bio Darwin/Socio Marx",
             "jumlah_jam" => 2,
@@ -947,6 +1117,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "84",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP9997",
             "nama_mata_pelajara" => "Art/DT/BS/CS",
             "jumlah_jam" => 2,
@@ -958,6 +1130,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "85",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP9996",
             "nama_mata_pelajara" => "Socio Parsons/Phy/Lit/Bio Mendel",
             "jumlah_jam" => 2,
@@ -969,6 +1143,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "86",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP9995",
             "nama_mata_pelajara" => "Lit/AM/Bio",
             "jumlah_jam" => 2,
@@ -980,6 +1156,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "87",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP9994",
             "nama_mata_pelajara" => "Phy Newton/Econ/Chem Lewis",
             "jumlah_jam" => 2,
@@ -991,6 +1169,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "88",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP9993",
             "nama_mata_pelajara" => "Chem/Geo/AM",
             "jumlah_jam" => 2,
@@ -1002,6 +1182,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "89",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP9992",
             "nama_mata_pelajara" => "Mat IPA/IPS",
             "jumlah_jam" => 2,
@@ -1013,6 +1195,8 @@ class Jadwal extends Model
         ],
         [
             "id" => "90",
+            "preferredDay" => [],
+            "preferredTime" => [],
             "mata_pelajaran_ref" => "MP9991",
             "nama_mata_pelajara" => "Chem/Socio/Eng-A",
             "jumlah_jam" => 2,
@@ -1023,7 +1207,6 @@ class Jadwal extends Model
             "kelas" => ["11R", "11W"],
         ],
     ];
-    
 
     public $data_jam = [
         ['MP', '7:20','7:30'],
@@ -1041,34 +1224,124 @@ class Jadwal extends Model
         ['10', '14:15','14:55'],
         ['HR', '14:55','15:00'],
     ];
+
+    static function removeStringInArray($arr) : array {
+        $result = [];
+        
+        foreach ($arr as $value) {
+            if (is_string($value) !== true) {
+                $result[] = $value;
+            }
+        }
+
+        return $result;
+    }
+
+    static function removeDuplicate($rangeArray) : array {
+        $result = [];
+        $tmpRangeArrayId = [];
+        
+        foreach ($rangeArray as $value) {
+            if (count($tmpRangeArrayId) > 0) {
+                $indexIfAny = null;
+                foreach ($tmpRangeArrayId as $valueInner) {
+                    if ($value['id'] !== $valueInner) {
+                        $indexIfAny = 1;
+                    }
+                }
+
+                if (!is_null($indexIfAny)) {
+                    $result[] = $value;
+                    $tmpRangeArrayId[] = $value['id'];
+                }
+            } else {
+                $result[] = $value;
+                $tmpRangeArrayId[] = $value['id'];
+            }
+        }
+        
+        return $result;
+    }
     
-    
-    static function getRandomId($rangeArray, $checkArray, $currenPosition, $position) {
-        $removeTarget = ['BELAJAR', 'MP', 'RECESS', 'LUNCH', 'DISMISSAL', 'PRAY'];
+    static function getRandomId($rangeArray, $checkArray, $currenPosition, $position, $day) {
+        // $removeTarget = ['BELAJAR', 'MP', 'RECESS', 'LUNCH', 'DISMISSAL', 'PRAY'];
         $verticalNumbers = [];
         $horizontalNumbers = $checkArray[$currenPosition];
+        $rangeArrayWithCriteria = [];
+        $rangeArrayWithoutCriteria = [];
+        
         for ($i = 0; $i < count($checkArray); $i++) {
-            $verticalNumbers[] = $checkArray[$i][$position];
+            $verticalNumbers[] = $checkArray[$i][$position]; 
         }
-        $horizontalNumbers = array_values(array_unique(array_diff($horizontalNumbers, $removeTarget)));
-        $verticalNumbers = array_values(array_unique(array_diff($verticalNumbers, $removeTarget)));
-        $availableNumbersVertical = array_values(array_intersect($rangeArray, $verticalNumbers));
-        $availableNumbersHorinzontal = array_values(array_intersect($rangeArray, $horizontalNumbers));
-        $mergeArr = array_values(array_unique(array_merge($availableNumbersVertical, $availableNumbersHorinzontal)));
-        $availableNumbersFixed = array_values(array_diff($rangeArray, $mergeArr));
-        if (empty($availableNumbersFixed)) {
-            // dd($horizontalNumbers,
-            // $verticalNumbers,
-            // $availableNumbersVertical,
-            // $availableNumbersHorinzontal,
-            // $mergeArr,
-            // $rangeArray,
-            // $availableNumbersFixed,
-            // $currenPosition, $position);
-            return false;
+
+        foreach ($rangeArray as $value) {
+            if (count($value['preferredDay']) > 0) {
+                foreach ($value['preferredDay'] as $valueDay) {
+                    if ($valueDay == $day) {
+                        $rangeArrayWithCriteria[] = $value;
+                    }
+                }
+            } else {
+                $rangeArrayWithoutCriteria[] = $value;
+            }
+
+            if (count($value['preferredTime']) > 0) {
+                foreach ($value['preferredTime'] as $valueTime) {
+                    if ($valueTime == $currenPosition) {
+                        $rangeArrayWithCriteria[] = $value;
+                    }
+                }
+            } else {
+                $rangeArrayWithoutCriteria[] = $value;
+            }
         }
-        $randomKey = array_rand($availableNumbersFixed);
-        $randomNumber = $availableNumbersFixed[$randomKey];
+        $dataWithCriteria = self::removeDuplicate($rangeArrayWithCriteria);
+        $dataWithoutCriteria = self::removeDuplicate($rangeArrayWithoutCriteria);
+        $horizontalNumbers = self::removeDuplicate(self::removeStringInArray($horizontalNumbers));
+        $verticalNumbers = self::removeDuplicate(self::removeStringInArray($verticalNumbers));
+        $dataVerticalHorizontalNumbersMerge = self::removeDuplicate(array_merge($horizontalNumbers, $verticalNumbers));
+
+        foreach ($dataVerticalHorizontalNumbersMerge as  $value) {
+            foreach ($dataWithCriteria as $key => $valueInner) {
+                if ($valueInner['id'] == $value['id']) {
+                    array_splice($dataWithCriteria, $key, 1);
+                }
+
+                if ($valueInner['mata_pelajaran_ref'] == $value['mata_pelajaran_ref']) {
+                    array_splice($dataWithCriteria, $key, 1);
+                }
+
+                // if ($valueInner['id_guru'] == $value['id_guru']) {
+                //     array_splice($dataWithCriteria, $key, 1);
+                // }
+            }
+
+            foreach ($dataWithoutCriteria as $key => $valueInner) {
+                if ($valueInner['id'] == $value['id']) {
+                    array_splice($dataWithoutCriteria, $key, 1);
+                }
+
+                if ($valueInner['mata_pelajaran_ref'] == $value['mata_pelajaran_ref']) {
+                    array_splice($dataWithoutCriteria, $key, 1);
+                }
+
+                // if ($valueInner['id_guru'] == $value['id_guru']) {
+                //     array_splice($dataWithoutCriteria, $key, 1);
+                // }
+            }
+        }
+
+        $randomKey = false;
+        $randomNumber = false;
+
+        if (count($dataWithCriteria) > 0) {
+            $randomKey = array_rand($dataWithCriteria);
+            $randomNumber = $dataWithCriteria[$randomKey];
+        } else if (count($dataWithoutCriteria) > 0) {
+            $randomKey = array_rand($dataWithoutCriteria);
+            $randomNumber = $dataWithoutCriteria[$randomKey];
+        }
+
         return $randomNumber;
     }
 }

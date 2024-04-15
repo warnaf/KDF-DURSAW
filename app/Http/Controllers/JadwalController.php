@@ -144,12 +144,14 @@ class JadwalController extends Controller
             'Jumat' => [],
         ];
         $fullJadwalKeys = array_keys($fullJadwal);
-            foreach ($kelas as $value) {
-                foreach ($value as $isi) {
-                    $kelasKey[] = $isi;
-                    $totalKelas++;
-                }
+        
+        foreach ($kelas as $value) {
+            foreach ($value as $isi) {
+                $kelasKey[] = $isi;
+                $totalKelas++;
             }
+        }
+
         for ($a=0; $a < count($fullJadwal); $a++) {  //looping per hari
             $jadwalReady = [];
             for ($i=0; $i < $totalJam; $i++) {  //pembentukan jam belajar
@@ -171,8 +173,10 @@ class JadwalController extends Controller
                 }
                 array_push($jadwalReady, $tmp);
             }
+
             for ($u=0; $u < $totalJam; $u++) { //implementasi per jam belajar
                 $incrementKelas = 0;
+
                 if($u === 0){
                     continue;
                 }else if($u === 5){
@@ -183,36 +187,50 @@ class JadwalController extends Controller
                 for ($j=0; $j < count($kelasKey); $j++) { //implementasi per kelas
                     $tambahCheckStep = 0;
                     $currentIdArray = self::peelingIdFromArray($cleanData[$kelasData[$j]]);
-                    if($currentIdArray === false){
+
+                    if ($currentIdArray === false) {
                         $incrementKelas++;
                         continue;
                     }
                     if($incrementKelas >= count($kelasKey)){
                         break;
                     }
-                    if($u + $tambahCheckStep >= $totalKelas) $tambahCheckStep = 0;
-                    $randomId = Jadwal::getRandomId($currentIdArray, $jadwalReady, ($u + $tambahCheckStep), $incrementKelas);
                     
-                    if($randomId === false){
+                    if ($u + $tambahCheckStep >= $totalKelas) $tambahCheckStep = 0;
+                    
+                    $randomId = Jadwal::getRandomId($cleanData[$kelasData[$j]], $jadwalReady, ($u + $tambahCheckStep), $incrementKelas, $a);
+
+                    if ($randomId === false) {
                         $incrementKelas++;
                         continue;
                     }
-                    $randomKey = self::findIndexInArray($cleanData[$kelasData[$j]], $randomId);
+
+                    $randomKey = self::findIndexInArray($cleanData[$kelasData[$j]], $randomId['id']);
                     $currentArray = &$cleanData[$kelasData[$j]][$randomKey];
                     $penguranganJamKerja = min($currentArray['jumlah_jam'], 2);
-                    if($currentArray['is_penjuruan'] == "1"){
+                    $dataToEmbed = [
+                        'id' => $currentArray['id'],
+                        'mata_pelajaran_ref' => $currentArray['mata_pelajaran_ref'],
+                        'nama_mata_pelajara' => $currentArray['nama_mata_pelajara'],
+                        'nama_guru' => $currentArray['nama_guru'],
+                        // 'id_guru' => $currentArray['id_guru'],
+                    ];
+                    
+                    if ($currentArray['is_penjuruan'] == "1") {
                         $kelasdalamAngka = self::getKelas($kelas, $incrementKelas);
                         $tmpIncrementKelas = $incrementKelas;
                         for ($iii=0; $iii < $kelasdalamAngka['back']; $iii++) { 
                             for ($k=$u; $k < ($penguranganJamKerja + $u ); $k++) {
-                                if($k >= $totalKelas){
+                                if ($k >= $totalKelas) {
                                     break;
                                 }
-                                if(in_array($jadwalReady[$k][$incrementKelas], $rules)){
+
+                                if (in_array($jadwalReady[$k][$incrementKelas], $rules)) {
                                     continue;
                                 }
+
                                 self::increaseTimeClass($cleanData, $kelasdalamAngka['current'], $jadwalReady[$k][$incrementKelas]);
-                                $jadwalReady[$k][$tmpIncrementKelas] = $currentArray['nama_mata_pelajara'];
+                                $jadwalReady[$k][$tmpIncrementKelas] = $dataToEmbed;
                             }
                             $tmpIncrementKelas--;
                         }
@@ -220,55 +238,68 @@ class JadwalController extends Controller
                         $tmpIncrementKelas = $incrementKelas;
                         for ($iii=0; $iii < $kelasdalamAngka['forward']; $iii++) { 
                             for ($k=$u; $k < ($penguranganJamKerja + $u); $k++) {
-                                if($k >= $totalKelas){
+                                if ($k >= $totalKelas) {
                                     break;
                                 }
-                                if(in_array($jadwalReady[$k][$incrementKelas], $rules)){
+
+                                if (in_array($jadwalReady[$k][$incrementKelas], $rules)) {
                                     continue;
                                 }
+
                                 self::increaseTimeClass($cleanData, $kelasdalamAngka['current'], $jadwalReady[$k][$incrementKelas]);
-                                $jadwalReady[$k][$tmpIncrementKelas] = $currentArray['nama_mata_pelajara'];
+                                $jadwalReady[$k][$tmpIncrementKelas] = $dataToEmbed;
                             }
                             $tmpIncrementKelas++;
                         }
+
                         self::decreaseTimeClass($cleanData, $kelasdalamAngka['family'], $randomKey, $penguranganJamKerja);
                         $incrementKelas += $kelasdalamAngka['forward'] + $kelasdalamAngka['back'];
-                        continue;
                     }else{
                         for ($k=$u; $k < ($penguranganJamKerja + $u + $tambahCheckStep); $k++) {
-                            if($k >= $totalKelas){
+                            if ($k >= $totalKelas) {
                                 break;
                             }
-                            if($jadwalReady[$k][$incrementKelas] !== "BELAJAR"){
+
+                            if ($jadwalReady[$k][$incrementKelas] !== "BELAJAR") {
                                 continue;
                             }
-                            $jadwalReady[$k][$incrementKelas] = $currentArray['id'];
+
+                            $jadwalReady[$k][$incrementKelas] = $dataToEmbed;
                             $currentArray['jumlah_jam'] -= 1;
                         }
                     }
                     $incrementKelas++;
                 }
             }
+            
             $sisaBelajar = self::checkIsCompleted($jadwalReady);
-            if($sisaBelajar !== true){
+
+            if ($sisaBelajar !== true) {
                 foreach ($sisaBelajar as $key => $value) {
                     $tambahCheckStep = 0;
-                    $currentIdArray = self::peelingIdFromArray($cleanData[$kelasData[$value['X']]]);
-                    if($currentIdArray === false){
+
+                    if ($incrementKelas >= count($kelasKey)) {
+                        break;
+                    }
+                    
+                    if ($u + $tambahCheckStep >= $totalKelas) $tambahCheckStep = 0;
+                    
+                    $randomId = Jadwal::getRandomId($$cleanData[$kelasData[$j]], $jadwalReady, $value['Y'], $value['X'], $a);
+
+                    if ($randomId === false) {
                         continue;
                     }
-                    $randomId = Jadwal::getRandomId($currentIdArray, $jadwalReady, $value['Y'], $value['X']);
-                    if($randomId === false){
-                        continue;
-                    }
+                    
                     $randomKey = self::findIndexInArray($cleanData[$kelasData[$value['X']]], $randomId);
                     $currentArray = &$cleanData[$kelasData[$value['X']]][$randomKey];
-                    $jadwalReady[$value['Y']][$value['X']] = $currentArray['id'];
+                    $jadwalReady[$value['Y']][$value['X']] = $currentArray;
                     $currentArray['jumlah_jam'] -= 1;
                 }
             }
+
             $fullJadwal[$fullJadwalKeys[$a]] = $jadwalReady;
         }
+
         return $fullJadwal;
         // return ['jadwal' => $fullJadwal, 'sisa' => $cleanData];
     }

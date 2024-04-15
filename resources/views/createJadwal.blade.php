@@ -198,7 +198,8 @@
                                                 <td>{{ $data['jam'][$keyY][1] }}</td>
                                                 <td>{{ $data['jam'][$keyY][2] }}</td>
                                                 @foreach ($jadwal as $keyZ => $itemJadwal)
-                                                    <td>{{ $itemJadwal }}</td>
+                                                    <td>{{ is_string($itemJadwal) ? $itemJadwal : $itemJadwal['nama_mata_pelajara'] }}
+                                                    </td>
                                                 @endforeach
                                             </tr>
                                         @endforeach
